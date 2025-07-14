@@ -47,3 +47,9 @@ VITE_API_URL=http://localhost:8000/api/v1/
 ```bash
 npm run dev
 ```
+
+5. fix bug
+*error*: Some issues need review, and may require choosing a different dependency.
+- npm cache clean --force
+- Xóa node_modules và package-lock.json
+- npm install
