@@ -12,7 +12,7 @@ type ChartType = 'line' | 'bar' | 'area';
 type DisplayType = 'revenue' | 'invoices' | 'both';
 
 interface RevenueItem {
-  label: string;
+  label: string;                                                                                                          
   total: number; // Doanh thu
   invoices?: number; // Số hóa đơn (nếu cần)
 }
@@ -144,6 +144,7 @@ const mockWeekData: Record<string, RevenueItem[]> = {
   ]
 };
 
+const yss = [2024, 2025]
 
 export default function RevenueChart() {
   const [mode, setMode] = useState<Mode>('year');
@@ -153,7 +154,7 @@ export default function RevenueChart() {
   const [month, setMonth] = useState(6);
   const [startDate, setStartDate] = useState('2025-06-01');
 
-  const years = [2024, 2025];
+  const years = yss; // api
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
 
   let data: RevenueItem[] = [];
@@ -258,8 +259,6 @@ export default function RevenueChart() {
         );
     }
     };
-
-
 
   return (
     <div className="p-4 shadow rounded-xl bg-white">
