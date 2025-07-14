@@ -4,13 +4,18 @@ GET: /api/v1/user/
     RES: (Mảng các user)
     [
         {
-            "MaKhachHang": "123e4567e89b12d3a456426614174000",
-            "TenKhachHang": "Nguyen Van A",
-            "DiaChi": "123 Đường A",
-            "SoDienThoai": "0909123456",
-            ...
-        },
-        ... 
+            "message": "Lấy danh sách khách hàng thành công",
+            "data": [
+                {
+                    "MaKhachHang": "123e4567e89b12d3a456426614174000",
+                    "TenKhachHang": "Nguyen Van A",
+                    "DiaChi": "123 Đường A",
+                    "SoDienThoai": "0909123456"
+                },
+                ...
+            ],
+            "success": true
+        }
     ]
 
 POST: /api/v1/user/
@@ -20,21 +25,6 @@ POST: /api/v1/user/
         "DiaChi": "456 Đường B",
         "SoDienThoai": "0909876543",
     }
-
-    => 
-    {
-        "data": {                           => Mã hóa biến data
-            "TenKhachHang": "Tran Thi B",
-            "DiaChi": "456 Đường B",
-            "SoDienThoai": "0909876543",
-            }
-        // Cải tiến
-        // "token": "----------"
-        // "auth": "-----------"
-    }
-
-
-
     RES (Thành công 201):
     {
         "message": "Tạo khách hàng thành công!",
@@ -42,15 +32,14 @@ POST: /api/v1/user/
             "MaKhachHang": "a1b2c3d4e5f67890abcdef1234567890",
             "TenKhachHang": "Tran Thi B",
             "DiaChi": "456 Đường B",
-            "SoDienThoai": "0909876543",
-        }
+            "SoDienThoai": "0909876543"
+        },
+        "success": true
     }
     RES (Lỗi 400):
     {
         "message": "Dữ liệu gửi lên không hợp lệ",
-        "errors": {
-
-        }
+        "success": false
     }
 
 
@@ -58,14 +47,19 @@ GET: /api/v1/user/<str:maKH>/
     REG:
     RES (Thành công 200):
     {
-        "MaKhachHang": "123e4567e89b12d3a456426614174000",
-        "TenKhachHang": "Nguyen Van A",
-        "DiaChi": "123 Đường A",
-        "SoDienThoai": "0909123456",
+        "message": "Lấy thông tin khách hàng thành công",
+        "data": {
+            "MaKhachHang": "123e4567e89b12d3a456426614174000",
+            "TenKhachHang": "Nguyen Van A",
+            "DiaChi": "123 Đường A",
+            "SoDienThoai": "0909123456"
+        },
+        "success": true
     }
     RES (Lỗi 404):
     {
-        "message": "Không tìm thấy khách hàng"
+        "message": "Không tìm thấy khách hàng",
+        "success": false
     }
 
 
@@ -82,20 +76,20 @@ PUT: /api/v1/user/<str:maKH>/
         "data": {
             "MaKhachHang": "123e4567e89b12d3a456426614174000",
             "TenKhachHang": "Nguyen Van Anh",
-            "DiaChi": "DDDĐ",
-            "SoDienThoai": "0909000000",
-        }
+            "DiaChi": "789 Đường C",
+            "SoDienThoai": "0909000000"
+        },
+        "success": true
     }
     RES (Lỗi 400):
     {
         "message": "Dữ liệu cập nhật không hợp lệ",
-        "errors": {
-
-        }
+        "success": false
     }
     RES (Lỗi 404):
     {
-        "message": "Không tìm thấy khách hàng"
+        "message": "Không tìm thấy khách hàng",
+        "success": false
     }
 
 
@@ -103,13 +97,14 @@ DELETE: /api/v1/user/<str:maKH>/
     REG:
     RES (Thành công 204):
     {
-        "message": "Xóa khách hàng thành công"
+        "message": "Xóa khách hàng thành công",
+        "success": true
     }
     RES (Lỗi 404):
     {
-        "message": "Không tìm thấy khách hàng"
+        "message": "Không tìm thấy khách hàng",
+        "success": false
     }
-
 
 --------- *** THỐNG KÊ
 GET /api/v1/thong-ke/available-years
