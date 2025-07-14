@@ -6,16 +6,9 @@ import {
   CartesianGrid, Tooltip, ResponsiveContainer,
 } from 'recharts';
 import { useState } from 'react';
+import type { ChartType, DisplayType, Mode, RevenueItem } from '../../types/thongKe';
 
-type Mode = 'year' | 'month' | 'week';
-type ChartType = 'line' | 'bar' | 'area';
-type DisplayType = 'revenue' | 'invoices' | 'both';
 
-interface RevenueItem {
-  label: string;                                                                                                          
-  total: number; // Doanh thu
-  invoices?: number; // Số hóa đơn (nếu cần)
-}
 
 // GET /api/v1/revenue/year?year=2025 -> Trả về 12 tháng gồm doanh thu và số hóa đơn mỗi tháng
 const mockMonthData: Record<number, RevenueItem[]> = {
@@ -144,7 +137,7 @@ const mockWeekData: Record<string, RevenueItem[]> = {
   ]
 };
 
-const yss = [2024, 2025]
+const yss:number[] = [2024, 2025]
 
 export default function RevenueChart() {
   const [mode, setMode] = useState<Mode>('year');
@@ -258,7 +251,7 @@ export default function RevenueChart() {
             </LineChart>
         );
     }
-    };
+  };
 
   return (
     <div className="p-4 shadow rounded-xl bg-white">
