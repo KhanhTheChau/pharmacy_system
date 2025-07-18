@@ -180,7 +180,7 @@ GET /api/v1/thong-ke/available-years
     }
 
 
-GET /api/v1/thong-ke/nam?nam=2025
+GET /api/v1/statistics/yearly?year=2025
     REQ:
 
     RES: {
