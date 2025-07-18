@@ -71,7 +71,7 @@ class KhachHangDetail(APIView):
                 "message": "Không tìm thấy khách hàng"
             }, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = self.get_serializer(kh, data=request.data.get("data", {}))
+        serializer = self.get_serializer(kh, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({

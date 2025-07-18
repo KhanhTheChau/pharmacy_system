@@ -121,7 +121,7 @@ const LoaiThuoc: React.FC = () => {
       setLoaiThuoc(row)
     }
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const { id, value } = e.target;
       setLoaiThuoc((prev) => prev ? { ...prev, [id]: value } : null);
     };
@@ -183,16 +183,35 @@ const LoaiThuoc: React.FC = () => {
               {columns.map((col) => (
                 <div key={col.key} className="grid grid-cols-[120px_1fr] items-center gap-2">
                   <label htmlFor={col.key}>{col.label}:</label>
-                  <input
-                    id={col.key}
-                    type="text"
-                    className="border px-2 py-1 w-full"
-                    value={loaiThuoc?.[col.key] ?? ""}
-                    onChange={handleInputChange}
-                  />
+
+                  {col.key === "DonViTinh" ? (
+                    <select
+                      id={col.key}
+                      className="border px-2 py-1 w-full"
+                      value={loaiThuoc?.[col.key] ?? ""}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">-- Chọn đơn vị --</option>
+                      <option value="viên">Viên</option>
+                      <option value="lọ">Lọ</option>
+                      <option value="ống">Ống</option>
+                      <option value="chai">Chai</option>
+                      <option value="hộp">Hộp</option>
+                      <option value="gói">Gói</option>
+                    </select>
+                  ) : (
+                    <input
+                      id={col.key}
+                      type="text"
+                      className="border px-2 py-1 w-full"
+                      value={loaiThuoc?.[col.key] ?? ""}
+                      onChange={handleInputChange}
+                    />
+                  )}
                 </div>
               ))}
             </div>
+
 
             <div className="grid grid-cols-2 gap-2 mt-4">
               <button className={buttonClass} onClick={() => setIsOpenModal(true)}>

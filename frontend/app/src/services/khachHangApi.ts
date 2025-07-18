@@ -1,3 +1,4 @@
+import { data } from "react-router-dom";
 import axiosClient from "../config/axios";
 import type { KhachHangFormType, KhachHangType } from "../types/khachHang";
 import type { APIResponse } from "../types/utils";
@@ -28,7 +29,7 @@ export const createKhachHang = async (
 ): Promise<KhachHangType> => {
   try {
     const res = await axiosClient.post<APIResponse<KhachHangType>>("user/", {
-      data: form, // hoặc chỉ form nếu bạn sửa backend
+      data: form, 
     });
 
     if (!res.data.success) {
@@ -53,7 +54,7 @@ export const updateKhachHang = async (
   try {
     const res = await axiosClient.put<APIResponse<KhachHangType>>(
       `user/${MaKhachHang}/`,
-      { data: form }
+      form
     );
     if (!res.data.success) throw new Error(res.data.message);
     return res.data.data!;
