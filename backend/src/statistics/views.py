@@ -179,18 +179,17 @@ def weekly_statistics(request):
     data_map = {item["weekday"]: item for item in queryset}
 
     data = []
-    for i in range(7):  # 0 → 6
+    for i in range(7):
         current_date = start_date + datetime.timedelta(days=i)
-        weekday = current_date.isoweekday()  # 1=Monday, 7=Sunday
+        iso_weekday = current_date.isoweekday()  # 1=Monday, ..., 7=Sunday
+        django_weekday = 1 if iso_weekday == 7 else iso_weekday + 1
 
-        # Convert to Django weekday (1=Sunday, 2=Monday,...)
-        django_weekday = 1 if weekday == 7 else weekday + 1
-
-        label = weekday_map[django_weekday]
         item = data_map.get(django_weekday)
 
         total = float(item["total"]) if item and item["total"] is not None else 0.0
         invoices = item["invoices"] if item else 0
+
+        label = f"{weekday_map[django_weekday]} ({current_date.strftime('%d/%m/%Y')})"
 
         data.append({
             "label": label,
