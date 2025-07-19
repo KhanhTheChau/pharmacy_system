@@ -12,16 +12,8 @@ import {
   faList,
 } from '@fortawesome/free-solid-svg-icons';
 import { Card } from "../ui/Card";
-
-type EntityCount = {
-  drugs: number;
-  manufacturers: number;
-  categories: number;
-  suppliers: number;
-  customers: number;
-  invoices: number;
-  invoiceDetails: number;
-};
+import type { EntityCount } from "../../types/thongKe";
+import { fetchEntityCount } from "../../services/thongKeApi";
 
 const iconMap = {
   drugs: <FontAwesomeIcon icon={faPills} className="text-purple-600" />,
@@ -44,25 +36,34 @@ const labels = {
 };
 
 export default function EntityStats() {
-  const [data, setData] = useState<EntityCount | null>(null);
+  const [data, setData] = useState<EntityCount>({
+    drugs: 0,
+    manufacturers: 0,
+    categories: 0,
+    suppliers: 0,
+    customers: 0,
+    invoices: 0,
+    invoiceDetails: 0,
+  });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const getEntityCount = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchEntityCount();
+        setData(data);
+      } catch (error) {
+        console.error("Lỗi khi fetch entity count:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // TODO: ...
-    setTimeout(() => {
-      setData({
-        drugs: 1,
-        manufacturers: 1,
-        categories: 1,
-        suppliers: 1,
-        customers: 1,
-        invoices: 1,
-        invoiceDetails: 1,
-      });
-    }, 300);
+    getEntityCount();
   }, []);
 
-  if (!data) return <div>Đang tải...</div>;
+  if (loading) return <div>Đang tải thống kê...</div>;
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
