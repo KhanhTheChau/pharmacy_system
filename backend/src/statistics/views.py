@@ -9,7 +9,11 @@ from suppliers.models import NhaCungCapModel
 from users.models import KhachHangModel
 from manufacturers.models import HangSXModel
 import datetime
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def entity_count(request):
     data = {
         "drugs": ThuocModel.objects.count(),
@@ -27,6 +31,8 @@ def entity_count(request):
         "success": True
     })
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def available_years(request):
     years = (
         HoaDonModel.objects
@@ -41,7 +47,8 @@ def available_years(request):
         "success": True
     })
 
-
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def yearly_statistics(request):
     year = request.GET.get('year')
     if not year:
@@ -85,7 +92,8 @@ def yearly_statistics(request):
         "success": True
     })
 
-
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def monthly_statistics(request):
     year = request.GET.get('nam') or request.GET.get('year')
     month = request.GET.get('thang') or request.GET.get('month')
@@ -134,6 +142,8 @@ def monthly_statistics(request):
         "success": True
     })
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def weekly_statistics(request):
     batdau = request.GET.get('start')
     if not batdau:

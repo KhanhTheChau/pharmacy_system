@@ -42,7 +42,7 @@ const DangKy = () => {
 
               if (res.success) {
                 alert("Đăng ký thành công! Vui lòng đăng nhập.");
-                navigate("/dang-nhap");
+                navigate("/admin/dang-nhap");
               } else {
                 alert(res.message || "Đăng ký thất bại!");
               }

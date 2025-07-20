@@ -54,20 +54,22 @@ export const logout = () => {
 
 
 // Refresh access token
-export const refreshToken = async (
-  refresh: string
-): Promise<{ access: string }> => {
+export const refreshToken = async (): Promise<string | null> => {
+  const refresh = localStorage.getItem("refresh_token");
+  if (!refresh) return null;
+
   try {
-    const res = await axiosClient.post<APIResponse<{ access: string }>>(
-      "account/refresh/",
-      {
-        refresh,
-      }
-    );
-    if (!res.data.success) throw new Error(res.data.message);
-    return res.data.data!;
+    const res = await axiosClient.post<APIResponse<TokenResponse>>("account/refresh/", {
+      refresh,
+    });
+
+    if (res.data.success && res.data.data?.access) {
+      localStorage.setItem("access_token", res.data.data.access);
+      return res.data.data.access;
+    }
   } catch (error) {
     console.error("Lỗi refresh token:", error);
-    throw error;
   }
+
+  return null;
 };

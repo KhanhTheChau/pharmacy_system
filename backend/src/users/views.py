@@ -4,11 +4,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import KhachHangModel
 from .serializers import KhachHangSerializer
+from rest_framework.permissions import IsAuthenticated
 
 def hello(request):
     return HttpResponse("Hello World", content_type="text/plain")
 
 class KhachHangList(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get_serializer(self, *args, **kwargs):
         return KhachHangSerializer(*args, **kwargs)
@@ -38,6 +40,7 @@ class KhachHangList(APIView):
 
 
 class KhachHangDetail(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get_serializer(self, *args, **kwargs):
         return KhachHangSerializer(*args, **kwargs) 

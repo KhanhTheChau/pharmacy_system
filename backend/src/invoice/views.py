@@ -5,8 +5,10 @@ from django.shortcuts import get_object_or_404
 from django.db.models import F, Sum, DecimalField, ExpressionWrapper
 from .models import HoaDonModel, ChiTietHoaDonModel
 from .serializers import HoaDonSerializer, ChiTietHoaDonSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class HoaDonListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
     def get_serializer(self, *args, **kwargs):
         return HoaDonSerializer(*args, **kwargs)
     
@@ -34,8 +36,8 @@ class HoaDonListCreateView(APIView):
             "errors": serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
-
 class HoaDonDetailView(APIView):
+    permission_classes = [IsAuthenticated]
     def get_serializer(self, *args, **kwargs):
         return HoaDonSerializer(*args, **kwargs)
     
@@ -77,6 +79,7 @@ class HoaDonDetailView(APIView):
         }, status=status.HTTP_204_NO_CONTENT)
 
 class ChiTietHoaDonListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
     def get_serializer(self, *args, **kwargs):
         return ChiTietHoaDonSerializer(*args, **kwargs)
     
@@ -116,6 +119,7 @@ class ChiTietHoaDonListCreateView(APIView):
 
 
 class ChiTietHoaDonDetailView(APIView):
+    permission_classes = [IsAuthenticated]
     def get_serializer(self, *args, **kwargs):
         return ChiTietHoaDonSerializer(*args, **kwargs)
     

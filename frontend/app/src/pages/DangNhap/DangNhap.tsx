@@ -94,7 +94,7 @@ const DangNhap = () => {
                   Chưa có tài khoản?{" "}
                 </span>
                 <NavLink
-                  to="/api/v1/dang-ky"
+                  to="/admin/dang-ky"
                   className="text-[#12B0C2] hover:underline font-medium text-sm"
                 >
                   Đăng ký ngay

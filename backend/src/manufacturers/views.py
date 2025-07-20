@@ -3,8 +3,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import HangSXModel
 from .serializers import HangSXSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class HangSXList(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get_serializer(self, *args, **kwargs):
         return HangSXSerializer(*args, **kwargs)
 
@@ -33,6 +36,8 @@ class HangSXList(APIView):
 
 
 class HangSXDetail(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get_serializer(self, *args, **kwargs):
         return HangSXSerializer(*args, **kwargs)
 

@@ -3,8 +3,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import LoaiThuocModel
 from .serializers import LoaiThuocSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class LoaiThuocList(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get_serializer(self, *args, **kwargs):
         return LoaiThuocSerializer(*args, **kwargs)
@@ -34,6 +36,7 @@ class LoaiThuocList(APIView):
 
 
 class LoaiThuocDetail(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get_serializer(self, *args, **kwargs):
         return LoaiThuocSerializer(*args, **kwargs) 

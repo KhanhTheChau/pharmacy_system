@@ -3,8 +3,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import NhaCungCapModel
 from .serializers import NhaCungCapSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class NhaCungCapList(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get_serializer(self, *args, **kwargs):
         return NhaCungCapSerializer(*args, **kwargs)
@@ -34,6 +36,7 @@ class NhaCungCapList(APIView):
 
 
 class NhaCungCapDetail(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get_serializer(self, *args, **kwargs):
         return NhaCungCapSerializer(*args, **kwargs) 

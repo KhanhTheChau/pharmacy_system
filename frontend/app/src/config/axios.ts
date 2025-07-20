@@ -1,4 +1,5 @@
 import axios from "axios";
+import { refreshToken } from "../services/authApi";
 const API_URL = import.meta.env.VITE_API_URL
 
 const axiosClient = axios.create({
@@ -11,36 +12,35 @@ const axiosClient = axios.create({
 });
 
 // Request interceptor
-axiosClient.interceptors.request.use(
-  (config) => {
-    
-    // .... 
-
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+axiosClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+  return config;
+});
 
 // Response Interceptor
 axiosClient.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    const status = error.response?.status;
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
 
-    if (status === 404) {
-      console.log("Resource not found!");
-    }
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      localStorage.getItem("refresh_token")
+    ) {
+      originalRequest._retry = true;
 
-    if (status === 401 || status === 403) {
-      console.log("Unauthorized - Redirecting to login");
+      const newAccessToken = await refreshToken();
+      if (newAccessToken) {
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        return axiosClient(originalRequest);
+      }
     }
 
     return Promise.reject(error);
   }
 );
-
 export default axiosClient;
