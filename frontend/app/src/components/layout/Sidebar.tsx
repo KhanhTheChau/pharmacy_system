@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { faUser, faPills, faFileInvoice, faChartBar, faFileExport, faBoxes, faTruck, faFlask, type IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faPills, faFileInvoice, faChartBar, faBoxes, faTruck, faFlask, type IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { logout } from "../../services/authApi";
 // import logo from "../../assets/logo.png";
 
 interface NavLink {
@@ -51,7 +52,7 @@ const Sidebar:React.FC = () => {
               </div>
             ))}
             <div className="text-xl">
-              <button className="p-4">Đăng xuất</button> 
+              <button className="p-4" onClick={logout}>Đăng xuất</button> 
             </div>
           </div>
         </div>

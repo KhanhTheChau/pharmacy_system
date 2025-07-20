@@ -1,39 +1,52 @@
 // src/pages/DangNhap.tsx
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { NavLink } from 'react-router-dom';
-import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { NavLink, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { login, type LoginForm } from "../../services/authApi";
 
 const LoginSchema = Yup.object().shape({
-  username: Yup.string()
-    .required('Bắt buộc nhập tên tài khoản'),
+  username: Yup.string().required("Bắt buộc nhập tên tài khoản"),
   password: Yup.string()
-    .min(8, 'Mật khẩu ít nhất 8 ký tự')
-    .required('Bắt buộc nhập mật khẩu'),
+    .min(8, "Mật khẩu ít nhất 8 ký tự")
+    .required("Bắt buộc nhập mật khẩu"),
 });
 
 const DangNhap = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Đăng nhập</h2>
 
-        <Formik
-          initialValues={{ username: '', password: '' }}
+        <Formik<LoginForm>
+          initialValues={{ username: "", password: "" }}
           validationSchema={LoginSchema}
-          onSubmit={(values, actions) => {
-            // TODO: Gọi API đăng nhập tại đây nhé
-            console.log('form đăng nhạp:', values);
-            alert(`Bạn đăng nhập tài khoản: ${values.username} & ${values.password}`)
-            
-            // Viết API thì bỏ setTimeOUt đi, t ví dụ thôi
-            setTimeout(() => {
-              actions.setSubmitting(false); 
-            }, 1000);
+          onSubmit={async (values, actions) => {
+            try {
+              const res = await login(values); // res là TokenResponse | null
+
+              if (res?.access && res?.refresh) {
+                localStorage.setItem("access_token", res.access);
+                localStorage.setItem("refresh_token", res.refresh);
+
+                alert("Đăng nhập thành công!");
+                navigate("/");
+              } else {
+                alert(
+                  "Đăng nhập thất bại! Kiểm tra lại tài khoản hoặc mật khẩu."
+                );
+              }
+            } catch (error) {
+              console.error("Lỗi khi đăng nhập:", error);
+              alert("Có lỗi xảy ra khi đăng nhập!");
+            } finally {
+              actions.setSubmitting(false);
+            }
           }}
         >
           {({ isSubmitting }) => (
             <Form className="space-y-4">
-
               <div>
                 <label htmlFor="email" className="block font-medium mb-1">
                   Tên đăng nhập
@@ -73,11 +86,13 @@ const DangNhap = () => {
                 disabled={isSubmitting}
                 className="bg-[#12B0C2] text-white w-full py-2 rounded hover:bg-[#0E8DA1] transition"
               >
-                {isSubmitting ? 'Đang xử lý...' : 'Đăng nhập'}
+                {isSubmitting ? "Đang xử lý..." : "Đăng nhập"}
               </button>
 
               <div className="text-center mt-4">
-                <span className="text-gray-600 text-sm">Chưa có tài khoản? </span>
+                <span className="text-gray-600 text-sm">
+                  Chưa có tài khoản?{" "}
+                </span>
                 <NavLink
                   to="/api/v1/dang-ky"
                   className="text-[#12B0C2] hover:underline font-medium text-sm"

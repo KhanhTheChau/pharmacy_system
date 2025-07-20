@@ -7,9 +7,13 @@ from suppliers.urls import urlpatterns as suppliers_urls
 from medicine.urls import urlpatterns as medicine_urls
 from invoice.urls import urlpatterns as invoice_urls
 from statistics.urls import urlpatterns as statistics_urls
+from account.urls import urlpatterns as account_urls
 
 class APIRouter:
     urlpatterns = [
+        path('account/', include(account_urls)),
+        # path('token/', include(account_urls)),
+        
         path("user/", include(user_urls)),
         path("manufacturer/", include(manufacturer_urls)),
         path("medicine-type/", include(medicine_types_urls)),
