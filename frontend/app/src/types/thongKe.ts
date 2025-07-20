@@ -17,3 +17,14 @@ export type EntityCount = {
   invoices: number;
   invoiceDetails: number;
 };
+
+export type TopSellingDrug = {
+  tenThuoc: string;
+  soLuong: number;
+  tongTien: number;
+};
+
+export type TopSellingParams = {
+  month?: number;
+  year?: number;
+};

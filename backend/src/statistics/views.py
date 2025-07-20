@@ -213,3 +213,40 @@ def weekly_statistics(request):
         "data": data,
         "success": True
     })
+
+
+def top_selling_drugs(request):
+    month = request.GET.get('month')
+    year = request.GET.get('year')
+
+    queryset = ChiTietHoaDonModel.objects.all()
+
+    if year:
+        queryset = queryset.filter(MaHoaDon__NgayLap__year=year)
+    if month:
+        queryset = queryset.filter(MaHoaDon__NgayLap__month=month)
+
+    result = (
+        queryset
+        .values("MaThuoc__TenThuoc")
+        .annotate(
+            soLuong=Sum("SoLuongBan"),
+            tongTien=Sum(F("SoLuongBan") * F("GiaBan"), output_field=FloatField())
+        )
+        .order_by("-soLuong")
+    )
+
+    data = [
+        {
+            "tenThuoc": item["MaThuoc__TenThuoc"],
+            "soLuong": item["soLuong"],
+            "tongTien": round(item["tongTien"], 2) if item["tongTien"] else 0.0,
+        }
+        for item in result
+    ]
+
+    return JsonResponse({
+        "message": "Danh sách thuốc bán ra",
+        "data": data,
+        "success": True
+    })

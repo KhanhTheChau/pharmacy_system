@@ -1,5 +1,5 @@
 import axiosClient from "../config/axios";
-import type { EntityCount, RevenueItem } from "../types/thongKe";
+import type { EntityCount, RevenueItem, TopSellingDrug, TopSellingParams } from "../types/thongKe";
 import type { APIResponse } from "../types/utils";
 
 // Lấy danh sách năm có dữ liệu
@@ -72,6 +72,29 @@ export const fetchWeeklyStatistics = async (start: string): Promise<RevenueItem[
     return res.data.data ?? [];
   } catch (error) {
     console.error(`Lỗi khi lấy thống kê tuần bắt đầu từ ${start}:`, error);
+    throw error;
+  }
+};
+
+export const fetchTopSellingDrugs = async ({
+  month,
+  year,
+}: {
+  month?: number;
+  year?: number;
+}): Promise<{ tenThuoc: string; soLuong: number; tongTien: number }[]> => {
+  try {
+    const params: TopSellingParams = {};
+    if (month) params.month = month;
+    if (year) params.year = year;
+
+    const res = await axiosClient.get<APIResponse<TopSellingDrug[]>>("/statistics/top-selling-drugs", { params });
+
+    if (!res.data.success) throw new Error(res.data.message);
+
+    return res.data.data ?? [];
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách thuốc bán chạy:", error);
     throw error;
   }
 };
