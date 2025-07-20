@@ -19,6 +19,7 @@ import Thuoc from "./pages/Thuoc/Thuoc";
 import ThongKe from "./pages/ThongKe/ThongKe";
 import DangKy from "./pages/DangNhap/DangKy";
 import PrivateRoute from "./routes/PrivateRoute";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -48,6 +49,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+
+       <ToastContainer />
     </>
   );
 }

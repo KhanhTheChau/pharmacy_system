@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { fetchSoonExpiringDrugs } from "../../services/thongKeApi";
+import { toast } from "react-toastify";
 
 const MainLayout: React.FC = () => {
+
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    if (checked) return;
+    const fetchData = async () => {
+      try {
+        const drugs = await fetchSoonExpiringDrugs();
+        if (drugs.length > 0) {
+          toast.warning(`Có ${drugs.length} thuốc sắp hết hạn!`, {
+            position: "top-right",
+            autoClose: 5000,
+          });
+        }
+      } catch (err) {
+        console.error("Không thể kiểm tra thuốc hết hạn.", err);
+      } finally {
+        setChecked(true);
+      }
+    };
+
+    fetchData();
+  }, [checked]);
+
   return (
     <div className="flex min-h-screen ">
       <Sidebar />

@@ -11,6 +11,8 @@ from manufacturers.models import HangSXModel
 import datetime
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from django.utils.timezone import now
+from datetime import timedelta
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -249,4 +251,37 @@ def top_selling_drugs(request):
         "message": "Danh sách thuốc bán ra",
         "data": data,
         "success": True
+    })
+
+
+def soon_expiring_drugs(request):
+    mode = request.GET.get("mode", "month")  # mặc định là tháng
+    days = 30  # default
+
+    if mode == "week":
+        days = 7
+    elif mode == "custom":
+        try:
+            days = int(request.GET.get("days", 30))
+        except (TypeError, ValueError):
+            days = 30
+
+    today = now().date()
+    threshold = today + timedelta(days=days)
+
+    drugs = ThuocModel.objects.filter(HanSuDung__range=(today, threshold))
+
+    data = [
+        {
+            "tenThuoc": d.TenThuoc,
+            "hanSuDung": d.HanSuDung,
+            "soLuongTon": d.SoLuongTonKho
+        }
+        for d in drugs
+    ]
+
+    return JsonResponse({
+        "success": True,
+        "message": f"Thuốc sắp hết hạn trong {days} ngày",
+        "data": data,
     })

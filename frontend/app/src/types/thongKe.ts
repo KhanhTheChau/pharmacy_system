@@ -28,3 +28,9 @@ export type TopSellingParams = {
   month?: number;
   year?: number;
 };
+
+export type SoonExpiredDrug = {
+  tenThuoc: string;
+  hanSuDung: string;
+  soLuongTon: number;
+};
