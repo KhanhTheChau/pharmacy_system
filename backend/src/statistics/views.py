@@ -253,7 +253,6 @@ def top_selling_drugs(request):
         "success": True
     })
 
-
 def soon_expiring_drugs(request):
     mode = request.GET.get("mode", "month")  # mặc định là tháng
     days = 30  # default
@@ -284,4 +283,54 @@ def soon_expiring_drugs(request):
         "success": True,
         "message": f"Thuốc sắp hết hạn trong {days} ngày",
         "data": data,
+    })
+
+def drug_status_statistics(request):
+    today = now().date()
+    in_seven_days = today + timedelta(days=7)
+    in_thirty_days = today + timedelta(days=30)
+
+    all_drugs = ThuocModel.objects.all()
+
+    status = {
+        "inStock": [],
+        "outOfStock": [],
+        "expired": [],
+        "expiring7": [],
+        "expiring30": [],
+    }
+
+    for drug in all_drugs:
+        if drug.SoLuongTonKho <= 0:
+            status["outOfStock"].append(drug)
+        elif drug.HanSuDung < today:
+            status["expired"].append(drug)
+        else:
+            if today <= drug.HanSuDung <= in_seven_days:
+                status["expiring7"].append(drug)
+            if today <= drug.HanSuDung <= in_thirty_days:
+                status["expiring30"].append(drug)
+            status["inStock"].append(drug)
+
+
+    def serialize(drugs):
+        return [
+            {
+                "tenThuoc": d.TenThuoc,
+                "soLuongTon": d.SoLuongTonKho,
+                "hanSuDung": d.HanSuDung,
+            }
+            for d in drugs
+        ]
+
+    return JsonResponse({
+        "success": True,
+        "message": "Thống kê tình trạng thuốc",
+        "data": {
+            "inStock": serialize(status["inStock"]),
+            "outOfStock": serialize(status["outOfStock"]),
+            "expired": serialize(status["expired"]),
+            "expiring7": serialize(status["expiring7"]),
+            "expiring30": serialize(status["expiring30"]),
+        }
     })

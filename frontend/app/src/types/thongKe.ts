@@ -34,3 +34,17 @@ export type SoonExpiredDrug = {
   hanSuDung: string;
   soLuongTon: number;
 };
+
+export interface DrugStatusItem {
+  tenThuoc: string;
+  soLuongTon: number;
+  hanSuDung: string;
+}
+
+export interface DrugStatusData {
+  inStock: DrugStatusItem[];
+  outOfStock: DrugStatusItem[];
+  expired: DrugStatusItem[];
+  expiring7: DrugStatusItem[];
+  expiring30: DrugStatusItem[];
+}

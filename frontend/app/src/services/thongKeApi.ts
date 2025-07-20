@@ -1,5 +1,5 @@
 import axiosClient from "../config/axios";
-import type { EntityCount, RevenueItem, SoonExpiredDrug, TopSellingDrug, TopSellingParams } from "../types/thongKe";
+import type { DrugStatusData, EntityCount, RevenueItem, SoonExpiredDrug, TopSellingDrug, TopSellingParams } from "../types/thongKe";
 import type { APIResponse } from "../types/utils";
 
 // Lấy danh sách năm có dữ liệu
@@ -117,6 +117,23 @@ export const fetchSoonExpiringDrugs = async (
     return res.data.data ?? [];
   } catch (error) {
     console.error("Lỗi khi lấy thuốc sắp hết hạn:", error);
+    throw error;
+  }
+};
+
+export const fetchDrugStatusStatistics = async (): Promise<DrugStatusData> => {
+  try {
+    const res = await axiosClient.get<APIResponse<DrugStatusData>>("/statistics/drug-status");
+    if (!res.data.success) throw new Error(res.data.message);
+    return res.data.data ?? {
+      inStock: [],
+      outOfStock: [],
+      expired: [],
+      expiring7: [],
+      expiring30: [],
+    };
+  } catch (error) {
+    console.error("Lỗi khi lấy thống kê tình trạng thuốc:", error);
     throw error;
   }
 };
