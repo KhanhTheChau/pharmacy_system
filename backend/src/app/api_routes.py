@@ -8,6 +8,7 @@ from medicine.urls import urlpatterns as medicine_urls
 from invoice.urls import urlpatterns as invoice_urls
 from statistics.urls import urlpatterns as statistics_urls
 from account.urls import urlpatterns as account_urls
+from services.urls import urlpatterns as services_urls
 
 class APIRouter:
     urlpatterns = [
@@ -21,4 +22,5 @@ class APIRouter:
         path("medicine/", include(medicine_urls)),
         path("invoice/", include(invoice_urls)),
         path("statistics/", include(statistics_urls)),
+        path("services/", include(services_urls)),
     ]

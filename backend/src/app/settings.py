@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'suppliers',
     'medicine',
     'invoice',
-    'statistics'
+    'statistics',
+    'services',
 ]
 
 
