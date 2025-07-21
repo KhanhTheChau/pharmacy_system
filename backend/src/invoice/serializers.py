@@ -50,7 +50,7 @@ class HoaDonSerializer(serializers.ModelSerializer):
     MaKH = serializers.PrimaryKeyRelatedField(
         queryset=KhachHangModel.objects.all()
     )
-    NgayLap = serializers.DateField()
+    NgayLap = serializers.DateTimeField()
     TongTien = serializers.DecimalField(
         max_digits=12, decimal_places=2, read_only=True
     )
