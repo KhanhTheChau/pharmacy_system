@@ -104,7 +104,7 @@ const HoaDon: React.FC = () => {
       </div>
 
       {/* Chi tiết hóa đơn ở bên phải */}
-      <div className="col-span-1 p-4 border rounded shadow overflow-y-auto max-h-[95vh]">
+      <div className="col-span-1 p-4 shadow rounded border border-[#ccc] overflow-y-auto max-h-[95vh]">
         <h3 className="text-lg font-semibold mb-4">Chi tiết hóa đơn</h3>
         {selectedHoaDon?.ChiTiet?.length ? (
           <table className="table-auto w-full border">

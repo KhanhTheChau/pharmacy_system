@@ -68,7 +68,7 @@ export default function EntityStats() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {Object.entries(data).map(([key, value]) => (
-        <Card key={key} className="flex items-center gap-3 p-4">
+        <Card key={key} className="flex items-center gap-3 border border-[#ccc] rounded-md p-4 shadow">
           <div className="text-2xl">{iconMap[key as keyof EntityCount]}</div>
           <div>
             <div className="text-sm text-muted-foreground">

@@ -13,6 +13,8 @@ import {
   fetchMonthlyStatistics,
   fetchWeeklyStatistics,
 } from '../../services/thongKeApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChartSimple } from '@fortawesome/free-solid-svg-icons';
 
 export default function RevenueChart() {
   const [mode, setMode] = useState<Mode>('year');
@@ -120,9 +122,10 @@ export default function RevenueChart() {
   };
 
   return (
-    <div className="p-4 shadow rounded-xl bg-white">
+    <div className="border border-[#ccc] rounded-md p-4 shadow bg-white">
       <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
         <h2 className="text-xl font-bold">
+          <FontAwesomeIcon icon={faChartSimple} className="mr-2 w-5 h-5" />
           Thống kê {displayType === 'revenue'
             ? 'doanh thu'
             : displayType === 'invoices'

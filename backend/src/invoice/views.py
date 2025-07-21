@@ -119,7 +119,7 @@ class ChiTietHoaDonListCreateView(APIView):
 
 
 class ChiTietHoaDonDetailView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get_serializer(self, *args, **kwargs):
         return ChiTietHoaDonSerializer(*args, **kwargs)
     

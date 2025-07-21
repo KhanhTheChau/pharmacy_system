@@ -20,6 +20,7 @@ import ThongKe from "./pages/ThongKe/ThongKe";
 import DangKy from "./pages/DangNhap/DangKy";
 import PrivateRoute from "./routes/PrivateRoute";
 import { ToastContainer } from "react-toastify";
+import TheoDoi from "./pages/TheoDoi/TheoDoi";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Navigate to="/admin/khach-hang" replace />}
+            element={<Navigate to="/admin/thong-ke" replace />}
           />
 
           <Route element={<PrivateRoute />}>
@@ -41,6 +42,7 @@ function App() {
               <Route path="/admin/nha-cung-cap" element={<NhaCungCap />} />
               <Route path="/admin/thong-ke" element={<ThongKe />} />
               <Route path="/admin/hoa-don" element={<HoaDon />}></Route>
+              <Route path="/admin/theo-doi" element={<TheoDoi />}></Route>
             </Route>
           </Route>
 

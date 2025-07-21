@@ -8,6 +8,8 @@ import {
 } from "recharts";
 import { useEffect, useState } from "react";
 import { fetchAvailableYears, fetchTopSellingDrugs } from "../../services/thongKeApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartPie } from "@fortawesome/free-solid-svg-icons";
 
 const COLORS = [
   "#0088FE", "#00C49F", "#FFBB28", "#FF8042",
@@ -77,9 +79,10 @@ const TopSellingPieChart = () => {
   ];
 
   return (
-    <div className="w-full bg-white shadow-md rounded-xl p-6">
+    <div className="w-full bg-white border border-[#ccc] rounded-md p-4 shadow">
       <div className="flex justify-between items-center flex-wrap mb-4 gap-4">
         <h2 className="text-xl font-semibold text-gray-800">
+          <FontAwesomeIcon icon={faChartPie} className="mr-2 w-5 h-5" />
           Thống kê thuốc đã bán theo {mode === "soLuong" ? "số lượng" : "tổng tiền"}
         </h2>
         <div className="flex gap-2 items-center">

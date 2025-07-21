@@ -1,15 +1,55 @@
 import { useEffect, useState } from "react";
 import type { DrugStatusData } from "../../types/thongKe";
 import { fetchDrugStatusStatistics } from "../../services/thongKeApi";
+import {
+  faCircleCheck,
+  faCircleXmark,
+  faCalendarMinus,
+  faCalendar,
+  faHourglass,
+  faCircleInfo,
+  type IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type StatusKey = keyof DrugStatusData;
 
-const statusList: { key: StatusKey; label: string; color: string }[] = [
-  { key: "inStock", label: "Còn hàng", color: "bg-green-100" },
-  { key: "outOfStock", label: "Hết hàng", color: "bg-red-100" },
-  { key: "expired", label: "Hết hạn", color: "bg-gray-100" },
-  { key: "expiring7", label: "Sắp hết hạn (7 ngày)", color: "bg-yellow-100" },
-  { key: "expiring30", label: "Sắp hết hạn (30 ngày)", color: "bg-orange-100" },
+const statusList: {
+  key: StatusKey;
+  label: string;
+  color: string;
+  icon: IconDefinition;
+}[] = [
+  {
+    key: "inStock",
+    label: "Còn hàng",
+    color: "bg-green-100",
+    icon: faCircleCheck,
+  },
+  {
+    key: "outOfStock",
+    label: "Hết hàng",
+    color: "bg-red-100",
+    icon: faCircleXmark,
+  },
+  {
+    key: "expired",
+    label: "Hết hạn",
+    color: "bg-gray-100",
+    icon: faHourglass,
+  },
+  {
+    key: "expiring7",
+    label: "Sắp hết hạn (7 ngày)",
+    color: "bg-yellow-100",
+    icon: faCalendarMinus,
+  },
+  {
+    key: "expiring30",
+    label: "Sắp hết hạn (30 ngày)",
+    color: "bg-orange-100",
+    icon: faCalendar,
+  },
 ];
 
 const DrugStatusCard = () => {
@@ -34,8 +74,11 @@ const DrugStatusCard = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Tình trạng thuốc</h2>
+    <div className="bg-white border border-[#ccc] rounded-md p-4 shadow">
+      <h2 className="text-xl font-semibold mb-4">
+        <FontAwesomeIcon icon={faCircleInfo} className="mr-2 w-5 h-5" />
+        Tình trạng thuốc
+      </h2>
 
       {loading && <p>Đang tải dữ liệu...</p>}
 
@@ -50,6 +93,10 @@ const DrugStatusCard = () => {
                   setSelectedStatus((prev) => (prev === s.key ? null : s.key))
                 }
               >
+                <FontAwesomeIcon
+                  icon={s.icon}
+                  className="text-gray-700 mb-1 w-5 h-5"
+                />
                 <p className="text-sm font-medium">{s.label}</p>
                 <p className="text-xl font-bold text-gray-700">
                   {data[s.key].length}
