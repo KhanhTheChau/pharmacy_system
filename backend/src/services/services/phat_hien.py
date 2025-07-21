@@ -42,3 +42,35 @@ def ban_ngoai_gio(hoadon):
     if gio < datetime.strptime("08:00", "%H:%M").time() or gio > datetime.strptime("18:00", "%H:%M").time():
         return f"Bán lúc {gio}, ngoài giờ hành chính"
     return None
+
+def kiem_tra_toan_bo_hoa_don():
+    ket_qua = []
+
+    all_cthd = ChiTietHoaDonModel.objects.select_related(
+        'MaHoaDon', 'MaThuoc', 'MaHoaDon__MaKH'
+    )
+
+    for cthd in all_cthd:
+        hoadon = cthd.MaHoaDon
+        khach = hoadon.MaKH
+
+        canh_bao = []
+
+        cb1 = khach_hang_mua_qua_nhieu(khach)
+        cb2 = mua_lap_lai(khach)
+        cb3 = gia_ban_lech(cthd)
+        cb4 = ban_ngoai_gio(hoadon)
+
+        for cb in [cb1, cb2, cb3, cb4]:
+            if cb:
+                canh_bao.append(cb)
+
+        if canh_bao:
+            ket_qua.append({
+                "MaHoaDon": hoadon.MaHoaDon,
+                "MaChiTietHD": cthd.MaChiTietHD,
+                "KhachHang": str(khach),
+                "CanhBao": canh_bao
+            })
+
+    return ket_qua

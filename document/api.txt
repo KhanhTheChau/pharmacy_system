@@ -188,3 +188,42 @@ GET /api/v1/revenue/overview
 
         "success": "" 
     }
+
+GET /api/v1/services/canh-bao/2fc0df71-cbcb-48b4-a548-12d563d0f19d/
+REQ: 
+RES: 
+    {
+    "success": true,
+    "message": "Kiểm tra hoàn tất",
+    "data": [
+        "Giá bán lệch nhiều: 95000 vs 120000",
+        "Bán lúc 19:05:00, ngoài giờ hành chính"
+        ]
+    }
+
+GET /api/v1/services/canh-bao/all/
+REQ: 
+RES: 
+    {
+    "success": true,
+    "message": "Phát hiện 2 hóa đơn có bất thường",
+    "data": [
+        {
+        "MaHoaDon": "1e23ff80-30af-43fa-8531-7840f943da44",
+        "MaChiTietHD": "2fc0df71-cbcb-48b4-a548-12d563d0f19d",
+        "KhachHang": "Nguyễn Văn A",
+        "CanhBao": [
+            "Khách hàng mua 210 thuốc (ID: 838172a0-bf57...) trong 30 ngày qua",
+            "Giá bán lệch nhiều: 95000 vs 120000"
+            ]
+        },
+        {
+        "MaHoaDon": "a51d3c20-cccb-4cc2-a9cf-ff63a0c4e223",
+        "MaChiTietHD": "ba30d1ff-8b8b-497a-8fc2-e8f0e62bd073",
+        "KhachHang": "Trần Thị B",
+        "CanhBao": [
+            "Bán lúc 19:45:00, ngoài giờ hành chính"
+            ]
+        }
+    ]
+    }

@@ -33,5 +33,15 @@ class PhatHienBatThuongView(APIView):
         return Response({
             "success": True,
             "message": "Kiểm tra hoàn tất",
-            "canh_bao": canh_bao or ["Không phát hiện bất thường"]
+            "data": canh_bao or ["Không phát hiện bất thường"]
+        })
+
+class KiemTraToanBoView(APIView):
+    def get(self, request):
+        danh_sach = phat_hien.kiem_tra_toan_bo_hoa_don()
+
+        return Response({
+            "success": True,
+            "message": f"Phát hiện {len(danh_sach)} hóa đơn có bất thường",
+            "data": danh_sach
         })
