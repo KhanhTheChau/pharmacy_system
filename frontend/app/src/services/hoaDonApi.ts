@@ -68,3 +68,8 @@ export const fetchInvoiceDetail = async (id: string): Promise<ChiTietHoaDonType 
     throw error;
   }
 };
+
+export const getCanhBaoByChiTietId = async (maChiTietHD: string) => {
+  const response = await axiosClient.get(`/services/canh-bao/${maChiTietHD}`);
+  return response.data?.data || [];
+};

@@ -4,13 +4,15 @@ import { fetchHoaDons } from "../../services/hoaDonApi";
 import type { HoaDonType } from "../../types/hoaDon";
 import type { KhachHangType } from "../../types/khachHang";
 import { formatCurrency } from "../../types/utils";
+import PrintButton from "../../components/layout/print/PrintButton";
+import CheckHoaDon from "../../components/layout/CheckHoaDon";
 
 const HoaDon: React.FC = () => {
   const [hoaDons, setHoaDons] = useState<HoaDonType[]>([]);
   const [selectedHoaDon, setSelectedHoaDon] = useState<HoaDonType | null>(null);
-  const [showKhachHangModal, setShowKhachHangModal] = useState(false);
+  // const [showKhachHangModal, setShowKhachHangModal] = useState(false);
   const [khachHang, setKhachHang] = useState<KhachHangType | null>(null);
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  // const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,7 +40,7 @@ const HoaDon: React.FC = () => {
         <div
           onClick={() => {
             setKhachHang(record.KhachHang ?? null);
-            setShowKhachHangModal(true);
+            // setShowKhachHangModal(true);
           }}
           className="text-black cursor-pointer relative group"
         >
@@ -67,31 +69,10 @@ const HoaDon: React.FC = () => {
       sortValue: (row) => row.TongTien,
       render: (_, record) => formatCurrency(record.TongTien),
     },
-    // {
-    //     key: "ChiTiet",
-    //     label: "Chi tiết",
-    //     render: (_, record) => (
-    //         <button
-    //             onClick={() => handleRowClick(record)}
-    //             className="text-sm text-blue-500 hover:underline"
-    //         >
-    //             Xem chi tiết
-    //         </button>
-    //     ),
-    // },
   ];
-
-//   const handleExportJson = () => {
-//     exportToJson<HoaDonType>(hoaDons, "hoa_don");
-//   };
-
-//   const buttonClass =
-//     "bg-[#12B0C2] text-white px-4 py-2 rounded hover:bg-[#0E8DA1] transition";
-
 
   return (
     <div className="grid grid-cols-3 gap-4">
-      {/* Danh sách hóa đơn ở giữa */}
       <div className="col-span-2">
         <DataTable<HoaDonType>
           data={hoaDons}
@@ -103,9 +84,24 @@ const HoaDon: React.FC = () => {
         />
       </div>
 
-      {/* Chi tiết hóa đơn ở bên phải */}
       <div className="col-span-1 p-4 shadow rounded border border-[#ccc] overflow-y-auto max-h-[95vh]">
-        <h3 className="text-lg font-semibold mb-4">Chi tiết hóa đơn</h3>
+        <h3 className="text-lg font-bold">Chi tiết hóa đơn</h3>
+        <hr />
+        {selectedHoaDon && (
+          <div className="mb-4 text-sm space-y-1 mt-2">
+            <h3 className="text-lg font-medium">Thông tin khách hàng</h3>
+            <p>
+              <strong>Họ tên:</strong> {selectedHoaDon.KhachHang?.TenKhachHang}
+            </p>
+            <p>
+              <strong>SĐT:</strong> {selectedHoaDon.KhachHang?.SoDienThoai}
+            </p>
+            <p>
+              <strong>Địa chỉ:</strong> {selectedHoaDon.KhachHang?.DiaChi}
+            </p>
+          </div>
+        )}
+
         {selectedHoaDon?.ChiTiet?.length ? (
           <table className="table-auto w-full border">
             <thead>
@@ -135,23 +131,32 @@ const HoaDon: React.FC = () => {
           <p>Chọn hóa đơn để xem chi tiết.</p>
         )}
 
-        {/* <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Xuất file</h3>
-          <div className="grid grid-cols-[120px_1fr] items-center gap-2">
-            <label>Xuất file Excel:</label>
-            <button onClick={handleExportExcel} className={buttonClass}>
-              Export to excel
-            </button>
-
-            <label>Xuất file Json:</label>
-            <button onClick={handleExportJson} className={buttonClass}>
-              Export to json
-            </button>
+        {selectedHoaDon && (
+          <div className="grid grid-cols-1 gap-1 mt-4">
+            <div>
+              <PrintButton
+                khachHang={selectedHoaDon.KhachHang?.TenKhachHang || "N/A"}
+                diaChi={selectedHoaDon.KhachHang?.DiaChi || "N/A"}
+                sdt={selectedHoaDon.KhachHang?.SoDienThoai || "N/A"}
+                items={
+                  selectedHoaDon.ChiTiet?.map((item) => ({
+                    tenSanPham: item.Thuoc?.TenThuoc || "N/A",
+                    donViTinh: item.Thuoc?.Loai?.DonViTinh || "",
+                    soLuong: item.SoLuongBan,
+                    donGia: item.GiaBan,
+                  })) || []
+                }
+                ngayLap={new Date(selectedHoaDon.NgayLap)}
+              />
+            </div>
+            <div>
+              {selectedHoaDon?.ChiTiet && (
+                <CheckHoaDon chiTietList={selectedHoaDon.ChiTiet} />
+              )}
+            </div>
           </div>
-        </div> */}
+        )}
       </div>
-
-      {/* Modal Thông tin khách hàng */}
     </div>
   );
 };
