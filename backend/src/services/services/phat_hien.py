@@ -1,7 +1,7 @@
 from datetime import timedelta, datetime
 from django.utils import timezone
 from django.db.models import Sum, Count
-from hoadon.models import ChiTietHoaDonModel, HoaDonModel
+from invoice.models import ChiTietHoaDonModel, HoaDonModel
 
 # 1. Mua số lượng lớn bất thường
 def khach_hang_mua_qua_nhieu(ma_khach_hang):
