@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from invoice.models import ChiTietHoaDonModel
-from services import phat_hien
+from .service import phat_hien
 
 class PhatHienBatThuongView(APIView):
 

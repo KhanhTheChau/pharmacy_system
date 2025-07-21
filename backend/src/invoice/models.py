@@ -14,7 +14,7 @@ class HoaDonModel(models.Model):
         related_name='hoadon',
         verbose_name='Khách hàng'
     )
-    NgayLap = models.DateField(
+    NgayLap = models.DateTimeField(
         default=timezone.now,
         verbose_name='Ngày lập hóa đơn'
     )

@@ -1,6 +1,8 @@
 from datetime import timedelta, datetime
 from django.utils import timezone
 from django.db.models import Sum, Count
+from decimal import Decimal
+from datetime import datetime
 from invoice.models import ChiTietHoaDonModel, HoaDonModel
 
 # 1. Mua số lượng lớn bất thường
@@ -21,7 +23,7 @@ def mua_lap_lai(ma_khach_hang):
     recent = ChiTietHoaDonModel.objects.filter(
         MaHoaDon__MaKH=ma_khach_hang,
         MaHoaDon__NgayLap__gte=timezone.now() - timedelta(days=7)
-    ).values('MaThuoc').annotate(so_lan=Count('id'))
+    ).values('MaThuoc').annotate(so_lan=Count('MaChiTietHD'))
 
     for item in recent:
         if item['so_lan'] > 3:
@@ -32,8 +34,11 @@ def mua_lap_lai(ma_khach_hang):
 # 3. Giá bán lệch nhiều
 def gia_ban_lech(cthd):
     don_gia = cthd.MaThuoc.DonGia
-    if abs(cthd.GiaBan - don_gia) > don_gia * 0.2:
+    nguong = don_gia * Decimal('0.2')  # Chuyển 0.2 thành Decimal
+
+    if abs(cthd.GiaBan - don_gia) > nguong:
         return f"Giá bán lệch nhiều: {cthd.GiaBan} vs {don_gia}"
+
     return None
 
 # 4. Bán ngoài giờ hành chính
