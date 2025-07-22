@@ -104,6 +104,7 @@ class ChiTietHoaDonListCreateView(APIView):
                                            output_field=DecimalField(max_digits=12, decimal_places=2)))
             )['tong'] or 0
             hoa_don.TongTien = tong
+            print(f"Tổng tiền hóa đơn {hoa_don.MaHoaDon}: {hoa_don.TongTien}")
             hoa_don.save()
 
             return Response({

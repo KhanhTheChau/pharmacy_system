@@ -51,9 +51,8 @@ class HoaDonSerializer(serializers.ModelSerializer):
         queryset=KhachHangModel.objects.all()
     )
     NgayLap = serializers.DateTimeField()
-    TongTien = serializers.DecimalField(
-        max_digits=12, decimal_places=2, read_only=True
-    )
+    TongTien = serializers.SerializerMethodField()
+
 
     # Nested danh sách chi tiết hóa đơn
     ChiTiet = ChiTietHoaDonSerializer(source='chitiethoadon', many=True, read_only=True)
@@ -68,12 +67,23 @@ class HoaDonSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Ngày lập không được lớn hơn hôm nay.")
         return value
 
-    def to_representation(self, instance):
-        # Tự động tính Tổng tiền bằng biểu thức tính toán trong queryset
-        instance.TongTien = ChiTietHoaDonModel.objects.filter(MaHoaDon=instance).aggregate(
-            tong=Sum(
-                ExpressionWrapper(F('GiaBan') * F('SoLuongBan'), output_field=DecimalField(max_digits=12, decimal_places=2))
+    def get_TongTien(self, obj):
+        result = ChiTietHoaDonModel.objects.filter(MaHoaDon=obj).aggregate(
+            TongTien=Sum(
+                ExpressionWrapper(
+                    F('GiaBan') * F('SoLuongBan'),
+                    output_field=DecimalField(max_digits=12, decimal_places=2)
+                )
             )
-        )['tong'] or 0
+        )
 
-        return super().to_representation(instance)
+        tong_tien = result['TongTien'] or 0
+
+        # Lưu xuống DB nếu khác với giá trị hiện tại
+        if obj.TongTien != tong_tien:
+            obj.TongTien = tong_tien
+            obj.save(update_fields=["TongTien"])  # chỉ update 1 trường cho nhanh
+
+        return tong_tien
+
+    

@@ -1,7 +1,7 @@
 USE pharmacy_db;
 SHOW TABLES;
 SELECT * FROM users_khachhangmodel;
-
+SELECT * FROM invoice_hoadonmodel;
 -- 1. Function – Hàm trả về số lượng thuốc còn lại trong kho của một loại thuốc
 DROP FUNCTION IF EXISTS fn_so_luong_ton_kho;
 
