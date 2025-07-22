@@ -64,7 +64,7 @@ class HoaDonSerializer(serializers.ModelSerializer):
         fields = ['MaHoaDon', 'MaKH', 'NgayLap', 'TongTien', 'KhachHang', 'ChiTiet']
 
     def validate_NgayLap(self, value):
-        if value > date.today():
+        if value.date() > date.today():
             raise serializers.ValidationError("Ngày lập không được lớn hơn hôm nay.")
         return value
 
