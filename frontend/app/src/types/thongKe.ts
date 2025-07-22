@@ -1,3 +1,5 @@
+import type { HoaDonType } from "./hoaDon";
+
 export interface RevenueItem {
   label: string;                                                                                                          
   total: number
@@ -47,4 +49,12 @@ export interface DrugStatusData {
   expired: DrugStatusItem[];
   expiring7: DrugStatusItem[];
   expiring30: DrugStatusItem[];
+}
+
+export interface InvoicesByDateData {
+  chiTiet: HoaDonType[];
+  soHoaDon: number;
+  soKhachHang: number;
+  soThuocBanRa: number;
+  tongTienThu: number;
 }

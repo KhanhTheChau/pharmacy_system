@@ -14,6 +14,12 @@ import NCCForm from "./NhaCCForm";
 import { exportToExcel } from "../../components/utils/exportExcel";
 import { exportToJson } from "../../components/utils/exportJson";
 import { filterAndSortData } from "../../components/utils/filterAndSortData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFileExport,
+  faMagnifyingGlass,
+  faTruck,
+} from "@fortawesome/free-solid-svg-icons";
 
 const NhaCungCap: React.FC = () => {
   const [nhaCungCaps, setNhaCungCaps] = useState<NhaCungCapType[]>([]);
@@ -205,7 +211,11 @@ const NhaCungCap: React.FC = () => {
 
       <div className="col-span-1 flex flex-col gap-4">
         <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Thông tin nhà cung cấp</h3>
+          <h3 className="font-semibold mb-4">
+            {" "}
+            <FontAwesomeIcon icon={faTruck} className="mr-2 w-5 h-5" />
+            Thông tin nhà cung cấp
+          </h3>
 
           <div className="space-y-4 max-w-md">
             {columns.map((col) => (
@@ -245,7 +255,13 @@ const NhaCungCap: React.FC = () => {
         </div>
 
         <div className="p-4 shadow border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Tìm kiếm nhà cung cấp</h3>
+          <h3 className="font-semibold mb-4">
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="mr-2 w-5 h-5"
+            />
+            Tìm kiếm nhà cung cấp
+          </h3>
           <div className="grid grid-cols-[120px_1fr] items-center gap-2">
             <label className="w-[120px]">Tìm theo:</label>
             <select
@@ -281,7 +297,11 @@ const NhaCungCap: React.FC = () => {
         </div>
 
         <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Xuất file</h3>
+          <h3 className="font-semibold mb-4">
+            {" "}
+            <FontAwesomeIcon icon={faFileExport} className="mr-2 w-5 h-5" />
+            Xuất file
+          </h3>
           <div className="grid grid-cols-[120px_1fr] items-center gap-2">
             <label>Xuất file Excel:</label>
             <button onClick={handleExportExcel} className={buttonClass}>

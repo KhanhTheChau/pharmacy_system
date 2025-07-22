@@ -6,6 +6,8 @@ import type { KhachHangType } from "../../types/khachHang";
 import { formatCurrency } from "../../types/utils";
 import PrintButton from "../../components/layout/print/PrintButton";
 import CheckHoaDon from "../../components/layout/CheckHoaDon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const HoaDon: React.FC = () => {
   const [hoaDons, setHoaDons] = useState<HoaDonType[]>([]);
@@ -85,11 +87,17 @@ const HoaDon: React.FC = () => {
       </div>
 
       <div className="col-span-1 p-4 shadow rounded border border-[#ccc] overflow-y-auto max-h-[95vh]">
-        <h3 className="text-lg font-bold">Chi tiết hóa đơn</h3>
+        <h3 className="text-lg font-bold">
+          <FontAwesomeIcon icon={faCircleInfo} className="mr-2 w-5 h-5" />
+          Chi tiết hóa đơn
+        </h3>
         <hr />
         {selectedHoaDon && (
           <div className="mb-4 text-sm space-y-1 mt-2">
-            <h3 className="text-lg font-medium">Thông tin khách hàng</h3>
+            <h3 className="text-lg font-medium">
+              <FontAwesomeIcon icon={faUser} className="mr-2 w-5 h-5" />
+              Thông tin khách hàng
+            </h3>
             <p>
               <strong>Họ tên:</strong> {selectedHoaDon.KhachHang?.TenKhachHang}
             </p>
@@ -105,7 +113,7 @@ const HoaDon: React.FC = () => {
         {selectedHoaDon?.ChiTiet?.length ? (
           <table className="table-auto w-full border">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-gray-200">
                 <th className="border px-2 py-1 text-left">Tên thuốc</th>
                 <th className="border px-2 py-1 text-right">Số lượng</th>
                 <th className="border px-2 py-1 text-right">Giá bán</th>
@@ -113,7 +121,7 @@ const HoaDon: React.FC = () => {
             </thead>
             <tbody>
               {selectedHoaDon.ChiTiet.map((item, index) => (
-                <tr key={index}>
+                <tr key={index} className="hover:bg-gray-100 cursor-pointer">
                   <td className="border px-2 py-1">
                     {item.Thuoc?.TenThuoc ?? "N/A"}
                   </td>

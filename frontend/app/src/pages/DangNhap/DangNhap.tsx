@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { login, type LoginForm } from "../../services/authApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string().required("Bắt buộc nhập tên tài khoản"),
@@ -16,7 +18,7 @@ const DangNhap = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <div className="bg-white border border-[#ccc] rounded-md p-6 shadow w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Đăng nhập</h2>
 
         <Formik<LoginForm>
@@ -49,6 +51,7 @@ const DangNhap = () => {
             <Form className="space-y-4">
               <div>
                 <label htmlFor="email" className="block font-medium mb-1">
+                  <FontAwesomeIcon icon={faUser} className="mr-2 w-5 h-5" />
                   Tên đăng nhập
                 </label>
                 <Field
@@ -66,6 +69,7 @@ const DangNhap = () => {
 
               <div>
                 <label htmlFor="password" className="block font-medium mb-1">
+                  <FontAwesomeIcon icon={faLock} className="mr-2 w-5 h-5" />
                   Mật khẩu
                 </label>
                 <Field

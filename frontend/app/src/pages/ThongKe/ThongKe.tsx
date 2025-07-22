@@ -3,6 +3,7 @@ import EntityStats from "../../components/layout/EntityStats";
 import RevenueLineChart from "../../components/layout/RevenueLineChart";
 import TopSellingPieChart from "../../components/layout/TopSellingPieChart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import InvoiceStatisticsByDate from "../../components/layout/InvoiceStatisticsByDate";
 
 export default function ThongKe() {
   return (
@@ -17,6 +18,7 @@ export default function ThongKe() {
             {/* <DrugStatusCard /> */}
             <RevenueLineChart />
             <TopSellingPieChart />
+            <InvoiceStatisticsByDate />
         </div>
     </div>
   );

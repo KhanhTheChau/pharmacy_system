@@ -130,47 +130,63 @@ const CanhBaoList: React.FC = () => {
             {loadingDetail ? (
               <p className="text-gray-500 italic">Đang tải chi tiết...</p>
             ) : invoiceDetail ? (
-              <table className="text-sm w-full border border-gray-200 rounded-md overflow-hidden">
+              <table className="w-full text-sm border border-gray-300 ">
                 <tbody>
-                  <tr className="even:bg-gray-50">
-                    <td className="p-2 font-medium border">Tên thuốc</td>
-                    <td className="p-2 border">
+                  <tr className="even:bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="border border-gray-300 p-2 font-medium">
+                      Tên thuốc
+                    </td>
+                    <td className="border border-gray-300 p-2">
                       {invoiceDetail.Thuoc?.TenThuoc || "không rõ"}
                     </td>
                   </tr>
-                  <tr className="even:bg-gray-50">
-                    <td className="p-2 font-medium border">Công dụng</td>
-                    <td className="p-2 border">
+                  <tr className="even:bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="border border-gray-300 p-2 font-medium">
+                      Công dụng
+                    </td>
+                    <td className="border border-gray-300 p-2">
                       {invoiceDetail.Thuoc?.CongDung || "không rõ"}
                     </td>
                   </tr>
-                  <tr className="even:bg-gray-50">
-                    <td className="p-2 font-medium border">Số lượng bán</td>
-                    <td className="p-2 border">
+                  <tr className="even:bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="border border-gray-300 p-2 font-medium">
+                      Số lượng bán
+                    </td>
+                    <td className="border border-gray-300 p-2">
                       {invoiceDetail.SoLuongBan}{" "}
                       {invoiceDetail.Thuoc?.Loai?.DonViTinh || ""}
                     </td>
                   </tr>
-                  <tr className="even:bg-gray-50">
-                    <td className="p-2 font-medium border">Giá bán</td>
-                    <td className="p-2 border">{invoiceDetail.GiaBan} đ</td>
-                  </tr>
-                  <tr className="even:bg-gray-50">
-                    <td className="p-2 font-medium border">Đơn giá niêm yết</td>
-                    <td className="p-2 border">
-                      {invoiceDetail.Thuoc?.DonGia || "?"} đ
+                  <tr className="even:bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="border border-gray-300 p-2 font-medium">
+                      Giá bán
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {invoiceDetail.GiaBan.toLocaleString()} đ
                     </td>
                   </tr>
-                  <tr className="even:bg-gray-50">
-                    <td className="p-2 font-medium border">Hãng sản xuất</td>
-                    <td className="p-2 border">
+                  <tr className="even:bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="border border-gray-300 p-2 font-medium">
+                      Đơn giá niêm yết
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      {invoiceDetail.Thuoc?.DonGia?.toLocaleString() || "?"} đ
+                    </td>
+                  </tr>
+                  <tr className="even:bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="border border-gray-300 p-2 font-medium">
+                      Hãng sản xuất
+                    </td>
+                    <td className="border border-gray-300 p-2">
                       {invoiceDetail.Thuoc?.HangSX?.TenHangSX || "?"} (
                       {invoiceDetail.Thuoc?.HangSX?.QuocGia || "?"})
                     </td>
                   </tr>
-                  <tr className="even:bg-gray-50">
-                    <td className="p-2 font-medium border">Nhà cung cấp</td>
-                    <td className="p-2 border">
+                  <tr className="even:bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <td className="border border-gray-300 p-2 font-medium">
+                      Nhà cung cấp
+                    </td>
+                    <td className="border border-gray-300 p-2">
                       {invoiceDetail.Thuoc?.NhaCungCap?.TenNCC || "?"}
                     </td>
                   </tr>

@@ -334,3 +334,85 @@ def drug_status_statistics(request):
             "expiring30": serialize(status["expiring30"]),
         }
     })
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def invoices_by_date(request):
+    date_str = request.GET.get("date")
+
+    if date_str:
+        try:
+            selected_date = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
+        except ValueError:
+            return JsonResponse({
+                "success": False,
+                "message": "Sai định dạng ngày. Dùng YYYY-MM-DD.",
+                "data": []
+            }, status=400)
+    else:
+        selected_date = now().date()
+
+    hoa_dons = HoaDonModel.objects.filter(NgayLap__date=selected_date).select_related("MaKH")
+    hoa_don_ids = [hd.MaHoaDon for hd in hoa_dons]
+
+    # Lấy toàn bộ chi tiết hóa đơn liên quan
+    chi_tiets = ChiTietHoaDonModel.objects.filter(MaHoaDon__in=hoa_don_ids).select_related("MaThuoc")
+
+    chi_tiet_map = {}
+    tong_so_thuoc = 0
+    tong_tien = 0
+    khach_hang_ids = set()
+
+    for ct in chi_tiets:
+        ma_hd = ct.MaHoaDon.MaHoaDon
+        if ma_hd not in chi_tiet_map:
+            chi_tiet_map[ma_hd] = []
+
+        tong_so_thuoc += ct.SoLuongBan
+        thanh_tien = float(ct.SoLuongBan * ct.GiaBan)
+        tong_tien += thanh_tien
+
+        chi_tiet_map[ma_hd].append({
+            "MaChiTietHD": ct.MaChiTietHD,
+            "MaThuoc": ct.MaThuoc.MaThuoc,
+            "SoLuongBan": ct.SoLuongBan,
+            "GiaBan": float(ct.GiaBan),
+            "Thuoc": {
+                "MaThuoc": ct.MaThuoc.MaThuoc,
+                "TenThuoc": ct.MaThuoc.TenThuoc,
+                "SoLuongTonKho": ct.MaThuoc.SoLuongTonKho,
+                "HanSuDung": ct.MaThuoc.HanSuDung,
+                # Thêm các trường khác nếu cần
+            }
+        })
+
+    result = []
+    for hd in hoa_dons:
+        if hd.MaKH:
+            khach_hang_ids.add(hd.MaKH.MaKhachHang)
+
+        result.append({
+            "MaHoaDon": hd.MaHoaDon,
+            "MaKH": hd.MaKH.MaKhachHang if hd.MaKH else None,
+            "NgayLap": hd.NgayLap,
+            "TongTien": float(hd.TongTien),
+            "KhachHang": {
+                "MaKhachHang": hd.MaKH.MaKhachHang,
+                "TenKhachHang": hd.MaKH.TenKhachHang,
+                "SoDienThoai": hd.MaKH.SoDienThoai,
+                "DiaChi": hd.MaKH.DiaChi
+            } if hd.MaKH else None,
+            "ChiTiet": chi_tiet_map.get(hd.MaHoaDon, [])
+        })
+
+    return JsonResponse({
+        "success": True,
+        "message": f"Danh sách hóa đơn ngày {selected_date.strftime('%d/%m/%Y')}",
+        "data": {
+            "chiTiet": result,
+            "soHoaDon": len(result),
+            "soKhachHang": len(khach_hang_ids),
+            "soThuocBanRa": tong_so_thuoc,
+            "tongTienThu": round(tong_tien, 2)
+        }
+    })

@@ -1,5 +1,5 @@
 import axiosClient from "../config/axios";
-import type { DrugStatusData, EntityCount, RevenueItem, SoonExpiredDrug, TopSellingDrug, TopSellingParams } from "../types/thongKe";
+import type { DrugStatusData, EntityCount, InvoicesByDateData, RevenueItem, SoonExpiredDrug, TopSellingDrug, TopSellingParams } from "../types/thongKe";
 import type { APIResponse } from "../types/utils";
 
 // Lấy danh sách năm có dữ liệu
@@ -134,6 +134,30 @@ export const fetchDrugStatusStatistics = async (): Promise<DrugStatusData> => {
     };
   } catch (error) {
     console.error("Lỗi khi lấy thống kê tình trạng thuốc:", error);
+    throw error;
+  }
+};
+
+/**
+ * Lấy danh sách hóa đơn theo ngày (mặc định là ngày hôm nay)
+ * @param date định dạng YYYY-MM-DD
+ */
+export const getInvoicesByDate = async (
+  date?: string
+): Promise<InvoicesByDateData> => {
+  try {
+    const params = date ? { date } : {};
+    const res = await axiosClient.get<APIResponse<InvoicesByDateData>>(
+      "/statistics/invoices-by-date",
+      { params }
+    );
+
+    if (!res.data.success) throw new Error(res.data.message);
+    if (!res.data.data) throw new Error("Không có dữ liệu từ server.");
+    
+    return res.data.data;
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách hóa đơn theo ngày:", error);
     throw error;
   }
 };

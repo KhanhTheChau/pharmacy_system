@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
+import { faSort, faSortUp, faSortDown, faList } from '@fortawesome/free-solid-svg-icons';
 
 export type Column<T> = {
   key: keyof T;
@@ -89,7 +89,11 @@ function DataTable<T extends object>({
 
   return (
     <div className=''>
-      {title && <h2 className="font-bold text-2xl mb-5">{title}</h2>}
+      {title && 
+      <h2 className="font-bold text-2xl mb-5"> 
+      <FontAwesomeIcon icon={faList} className="mr-2 w-5 h-5" />
+         {title}
+         </h2>}
       {data.length === 0 ? (
         <div className="flex justify-center items-center h-40">
           <svg className="animate-spin h-6 w-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

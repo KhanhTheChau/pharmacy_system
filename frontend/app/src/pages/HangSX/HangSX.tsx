@@ -11,6 +11,12 @@ import AddForm from "./AddForm";
 import { filterAndSortData } from "../../components/utils/filterAndSortData";
 import { exportToJson } from "../../components/utils/exportJson";
 import { exportToExcel } from "../../components/utils/exportExcel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFileExport,
+  faFlask,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 const HangSX: React.FC = () => {
   const [HangSXs, setHangSXs] = useState<HangSXType[]>([]);
@@ -190,7 +196,10 @@ const HangSX: React.FC = () => {
 
       <div className="col-span-1 flex flex-col gap-4">
         <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Thông tin hãng sản xuất</h3>
+          <h3 className="font-semibold mb-4">
+            <FontAwesomeIcon icon={faFlask} className="mr-2 w-5 h-5" />
+            Thông tin hãng sản xuất
+          </h3>
 
           <div className="space-y-4 max-w-md">
             {columns.map((col) => (
@@ -230,15 +239,20 @@ const HangSX: React.FC = () => {
         </div>
 
         <div className="p-4 shadow border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Tìm kiếm hãng sản xuất</h3>
+          <h3 className="font-semibold mb-4">
+            {" "}
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="mr-2 w-5 h-5"
+            />
+            Tìm kiếm hãng sản xuất
+          </h3>
           <div className="grid grid-cols-[120px_1fr] items-center gap-2">
             <label className="w-[120px]">Tìm theo:</label>
             <select
               value={searchKey}
               className="border px-2 py-1"
-              onChange={(e) =>
-                setSearchKey(e.target.value as keyof HangSXType)
-              }
+              onChange={(e) => setSearchKey(e.target.value as keyof HangSXType)}
             >
               <option value="TenHangSX">Tên hãng sản xuất</option>
               <option value="QuocGia">Quốc gia</option>
@@ -266,7 +280,11 @@ const HangSX: React.FC = () => {
         </div>
 
         <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Xuất file</h3>
+          <h3 className="font-semibold mb-4">
+            {" "}
+            <FontAwesomeIcon icon={faFileExport} className="mr-2 w-5 h-5" />
+            Xuất file
+          </h3>
           <div className="grid grid-cols-[120px_1fr] items-center gap-2">
             <label>Xuất file Excel:</label>
             <button onClick={handleExportExcel} className={buttonClass}>

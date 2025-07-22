@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import type { ChiTietHoaDonType } from "../../types/hoaDon";
 import { getCanhBaoByChiTietId } from "../../services/hoaDonApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 type CanhBaoButtonProps = {
   chiTietList: ChiTietHoaDonType[];
@@ -59,7 +61,11 @@ const CheckHoaDon: React.FC<CanhBaoButtonProps> = ({ chiTietList }) => {
 
       {canhBaoList.length > 0 && (
         <div className="mt-4 ">
-          <h2 className="text-lg font-bold">Kết quả kiểm tra</h2>
+          <h2 className="text-lg font-bold">
+            {" "}
+            <FontAwesomeIcon icon={faCircleCheck} className="mr-2 w-5 h-5" />
+            Kết quả kiểm tra
+          </h2>
           <table className="w-full border text-sm">
             <thead className="bg-gray-100">
               <tr>
@@ -69,7 +75,10 @@ const CheckHoaDon: React.FC<CanhBaoButtonProps> = ({ chiTietList }) => {
             </thead>
             <tbody>
               {canhBaoList.map((item, index) => (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  className="even:bg-gray-50 hover:bg-gray-100 transition-colors"
+                >
                   <td className="border px-2 py-1">{item.tenThuoc}</td>
                   <td className="border px-2 py-1">{item.message}</td>
                 </tr>

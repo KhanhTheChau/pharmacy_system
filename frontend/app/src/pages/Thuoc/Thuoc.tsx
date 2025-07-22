@@ -21,8 +21,17 @@ import ThuocForm from "./ThuocForm";
 import { formatCurrency } from "../../types/utils";
 // import { exportToExcel } from "../../components/utils/exportExcel";
 import { exportToJson } from "../../components/utils/exportJson";
-import { filterAndSortByNestedKey, getValueByPath } from "../../components/utils/filterAndSortData";
+import {
+  filterAndSortByNestedKey,
+  getValueByPath,
+} from "../../components/utils/filterAndSortData";
 import { exportToExcel } from "../../components/utils/exportExcel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCapsules,
+  faFileExport,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Thuoc: React.FC = () => {
   const [thuocs, setThuocs] = useState<ThuocType[]>([]);
@@ -482,7 +491,6 @@ const Thuoc: React.FC = () => {
     }
   );
 
-
   const handelCancelSearch = async () => {
     setQuery("");
   };
@@ -541,11 +549,12 @@ const Thuoc: React.FC = () => {
         )}
       </div>
 
-    <div className="col-span-1 flex flex-col gap-4 overflow-y-auto p-2 max-h-[calc(100vh-64px)]">
-
-
+      <div className="col-span-1 flex flex-col gap-4 overflow-y-auto p-2 max-h-[calc(100vh-64px)]">
         <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Thông tin thuốc</h3>
+          <h3 className="font-semibold mb-4">
+            <FontAwesomeIcon icon={faCapsules} className="mr-2 w-5 h-5" />
+            Thông tin thuốc
+          </h3>
 
           <div className="space-y-4 max-w-md">
             {columns.map((col) => (
@@ -579,7 +588,13 @@ const Thuoc: React.FC = () => {
         </div>
 
         <div className="p-4 shadow border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Tìm kiếm thuốc</h3>
+          <h3 className="font-semibold mb-4">
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="mr-2 w-5 h-5"
+            />
+            Tìm kiếm thuốc
+          </h3>
 
           <div className="grid grid-cols-[120px_1fr] items-center gap-2">
             <label className="w-[120px]">Tìm theo:</label>
@@ -638,7 +653,11 @@ const Thuoc: React.FC = () => {
         </div>
 
         <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Xuất file</h3>
+          <h3 className="font-semibold mb-4">
+            {" "}
+            <FontAwesomeIcon icon={faFileExport} className="mr-2 w-5 h-5" />
+            Xuất file
+          </h3>
           <div className="grid grid-cols-[120px_1fr] items-center gap-2">
             <label>Xuất file Excel:</label>
             <button onClick={handleExportExcel} className={buttonClass}>

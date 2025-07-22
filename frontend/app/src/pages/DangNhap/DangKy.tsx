@@ -2,6 +2,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { register } from "../../services/authApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const RegisterSchema = Yup.object().shape({
   username: Yup.string().required("Bắt buộc nhập tên tài khoản"),
@@ -21,7 +23,7 @@ const DangKy = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <div className="bg-white border border-[#ccc] rounded-md p-6 shadow w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Đăng ký</h2>
 
         <Formik
@@ -48,7 +50,7 @@ const DangKy = () => {
               }
             } catch (err) {
               alert("Có lỗi xảy ra khi đăng ký.");
-              console.log(err)
+              console.log(err);
             } finally {
               actions.setSubmitting(false);
             }
@@ -58,6 +60,7 @@ const DangKy = () => {
             <Form className="space-y-4">
               <div>
                 <label htmlFor="username" className="block font-medium mb-1">
+                  <FontAwesomeIcon icon={faUser} className="mr-2 w-5 h-5" />
                   Tên đăng nhập
                 </label>
                 <Field
@@ -75,6 +78,7 @@ const DangKy = () => {
 
               <div>
                 <label htmlFor="email" className="block font-medium mb-1">
+                  <FontAwesomeIcon icon={faEnvelope} className="mr-2 w-5 h-5" />
                   Email
                 </label>
                 <Field
@@ -92,6 +96,7 @@ const DangKy = () => {
 
               <div>
                 <label htmlFor="password" className="block font-medium mb-1">
+                  <FontAwesomeIcon icon={faLock} className="mr-2 w-5 h-5" />
                   Mật khẩu
                 </label>
                 <Field
@@ -112,6 +117,7 @@ const DangKy = () => {
                   htmlFor="confirmPassword"
                   className="block font-medium mb-1"
                 >
+                  <FontAwesomeIcon icon={faLock} className="mr-2 w-5 h-5" />
                   Nhập lại mật khẩu
                 </label>
                 <Field

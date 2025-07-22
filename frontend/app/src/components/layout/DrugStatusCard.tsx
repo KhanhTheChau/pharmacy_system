@@ -93,11 +93,14 @@ const DrugStatusCard = () => {
                   setSelectedStatus((prev) => (prev === s.key ? null : s.key))
                 }
               >
-                <FontAwesomeIcon
-                  icon={s.icon}
-                  className="text-gray-700 mb-1 w-5 h-5"
-                />
-                <p className="text-sm font-medium">{s.label}</p>
+                <div className="flex items-center" title={s.label}>
+                  <FontAwesomeIcon
+                    icon={s.icon}
+                    className="text-gray-700 w-5 h-5 mr-2"
+                  />
+                  <p className="text-sm font-medium">{s.label}</p>
+                </div>
+
                 <p className="text-xl font-bold text-gray-700">
                   {data[s.key].length}
                 </p>

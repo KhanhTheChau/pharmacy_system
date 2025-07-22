@@ -11,6 +11,12 @@ import AddForm from "./AddForm";
 import { exportToExcel } from "../../components/utils/exportExcel";
 import { exportToJson } from "../../components/utils/exportJson";
 import { filterAndSortData } from "../../components/utils/filterAndSortData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFileExport,
+  faMagnifyingGlass,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 const KhachHang: React.FC = () => {
   const [khachHangs, setKhachHangs] = useState<KhachHangType[]>([]);
@@ -157,7 +163,7 @@ const KhachHang: React.FC = () => {
     const data = khachHangs.map((kh) => ({
       "Mã KH": kh.MaKhachHang,
       "Tên KH": kh.TenKhachHang,
-      "SĐT": kh.SoDienThoai,
+      SĐT: kh.SoDienThoai,
       "Địa chỉ": kh.DiaChi,
     }));
 
@@ -225,7 +231,10 @@ const KhachHang: React.FC = () => {
 
       <div className="col-span-1 flex flex-col gap-4">
         <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Thông tin khách hàng</h3>
+          <h3 className="font-semibold mb-4">
+            <FontAwesomeIcon icon={faUser} className="mr-2 w-5 h-5" />
+            Thông tin khách hàng
+          </h3>
           <div className="space-y-4 max-w-md">
             {columns.map((col) => (
               <div
@@ -264,7 +273,13 @@ const KhachHang: React.FC = () => {
         </div>
 
         <div className="p-4 shadow border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Tìm Kiếm Khách Hàng</h3>
+          <h3 className="font-semibold mb-4">
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="mr-2 w-5 h-5"
+            />
+            Tìm Kiếm Khách Hàng
+          </h3>
           <div className="grid grid-cols-[120px_1fr] items-center gap-2">
             <label className="w-[120px]">Tìm theo:</label>
             <select
@@ -303,7 +318,10 @@ const KhachHang: React.FC = () => {
         </div>
 
         <div className="p-4 shadow rounded border border-[#ccc]">
-          <h3 className="font-semibold mb-4">Xuất file</h3>
+          <h3 className="font-semibold mb-4">
+            <FontAwesomeIcon icon={faFileExport} className="mr-2 w-5 h-5" />
+            Xuất file
+          </h3>
           <div className="grid grid-cols-[120px_1fr] items-center gap-2">
             <label>Xuất file Excel:</label>
             <button onClick={handleExportExcel} className={buttonClass}>
