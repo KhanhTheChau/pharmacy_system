@@ -93,7 +93,7 @@ docker stop mysql-container
 ---
 
 ### Tạo cơ sở dữ liệu - mysql (Không dùng docker)
-Xem hướng dẫn trong học phần CT467
+Xem hướng dẫn trong học phần CT467 (Đại học Cần Thơ)
 ```bash
 https://drive.google.com/drive/folders/12CPj5cC7M2b5HFrTSBPzYI5KDpuV5lWj?usp=sharing
 ```
