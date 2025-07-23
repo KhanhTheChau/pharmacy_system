@@ -4,7 +4,7 @@
 
 ### Mô tả
 
-Ứng dụng frontend React kết nối với backend Django qua API, sử dụng Axios để gọi các endpoint.
+Ứng dụng frontend React kết nối với backend Django qua API, sử dụng Axios để gọi các endpoint. Có dùng `tailwindcss` và `typescript` ,...
 
 ---
 
@@ -12,7 +12,7 @@
 
 - Node.js (phiên bản >= 16)
 - npm hoặc yarn
-- Backend Django đang chạy trên `http://localhost:8000`
+- Backend Django đang chạy trên `http://localhost:8000` hoặc port khác cũng được
 
 ---
 
