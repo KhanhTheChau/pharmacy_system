@@ -1,7 +1,7 @@
 ## Backend
 
 ### Mô tả
-Backend được xây dựng bằng dijango cùng với cơ sở dữ liệu MySQL, dễ dàng viết API để giao tiếp đến Fontend tạo một hệ thống linh hoạt
+Backend được xây dựng bằng dijango cùng với cơ sở dữ liệu MySQL, thực hiện theo RESTful API
 
 ---
 
