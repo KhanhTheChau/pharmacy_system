@@ -1,15 +1,15 @@
 MaLoai,MaHangSX,MaNCC,TenThuoc,CongDung,DonGia,SoLuongTonKho,HanSuDung
 Thuốc kháng sinh,Pfizer,Công ty TNHH Dược phẩm An Khang,Amoxicillin 500mg,Kháng sinh điều trị nhiễm khuẩn,120000,240,2026-12-01 08:00:00
-Thuốc giảm đau,Sanofi,Công ty CP Dược Hậu Giang,Paracetamol 500mg,Giảm đau hạ sốt,80000,500,2027-01-15
-Siro ho,Traphaco,Công ty TNHH Thảo Dược Xanh,Siro ho Prospan,Giảm ho long đờm,95000,150,2026-10-20
-Thuốc nhỏ mắt,Novartis,Công ty TNHH Dược An Tâm,Natri Clorid 0.9%,Rửa mắt,45000,100,2025-12-31
-Nước muối sinh lý,Domesco,Công ty CP Thiên Long Pharma,Nước muối sinh lý 0.9%,Sát khuẩn,35000,600,2027-03-05
-Thuốc cảm cúm,GSK,Công ty TNHH Dược phẩm Minh Tâm,Tiffy,Giảm triệu chứng cảm cúm,75000,220,2026-08-08
+Thuốc giảm đau,Sanofi,Công ty CP Dược Hậu Giang,Paracetamol 500mg,Giảm đau hạ sốt,8000,500,2025-07-25
+Siro ho,Traphaco,Công ty TNHH Thảo Dược Xanh,Siro ho Prospan,Giảm ho long đờm,95000,150,2025-07-26
+Thuốc nhỏ mắt,Novartis,Công ty TNHH Dược An Tâm,Natri Clorid 0.9%,Rửa mắt,45000,100,2025-07-30
+Nước muối sinh lý,Domesco,Công ty CP Thiên Long Pharma,Nước muối sinh lý 0.9%,Sát khuẩn,35000,600,2025-07-25
+Thuốc cảm cúm,GSK,Công ty TNHH Dược phẩm Minh Tâm,Tiffy,Giảm triệu chứng cảm cúm,75000,220,2025-07-30
 Vitamin tổng hợp,DHG Pharma,Công ty TNHH Y Dược Phúc Lộc,Multivitamin tổng hợp,Bổ sung vitamin,130000,320,2027-05-12
 Men tiêu hóa,Sun Pharma,Công ty CP Dược An Bình,Enterogermina,Hỗ trợ tiêu hóa,100000,180,2026-09-15
 Thuốc dạ dày,Imexpharm,Công ty TNHH Dược Sài Gòn,Omeprazole 20mg,Giảm tiết axit dạ dày,115000,210,2027-11-20
-Thuốc chống dị ứng,Bayer,Công ty TNHH Dược Thái Dương,Clorpheniramin 4mg,Chống dị ứng,65000,400,2026-06-30
-Thuốc bổ gan,Hikma,Công ty TNHH Thiết bị Y tế Việt,HEPA-Merz,Bảo vệ gan,185000,150,2027-07-01
+Thuốc chống dị ứng,Bayer,Công ty TNHH Dược Thái Dương,Clorpheniramin 4mg,Chống dị ứng,65000,400,2025-08-15
+Thuốc bổ gan,Hikma,Công ty TNHH Thiết bị Y tế Việt,HEPA-Merz,Bảo vệ gan,185000,150,2025-08-15
 Dung dịch sát khuẩn,Otsuka Pharmaceutical,Công ty TNHH Dược Thịnh Vượng,Cồn 70 độ,Sát trùng vết thương,40000,300,2026-11-11
 Thuốc bổ mắt,Pharbaco,Công ty CP Dược phẩm Hòa Bình,Ocuvite,Bổ mắt,170000,190,2027-02-25
 Viên sắt,Lupin,Công ty TNHH Dược Hồng Đức,Ferro-B B9,Thiếu máu thiếu sắt,95000,280,2026-10-10
@@ -20,7 +20,7 @@ Thuốc điều trị tiểu đường,AbbVie,Công ty TNHH Dược An Lành,Met
 Canxi sủi,Takeda,Công ty CP Dược phẩm Phú Thọ,Canxi Sandoz,Bổ sung canxi,140000,130,2026-08-18
 Thuốc đau bụng,Sun Pharma,Công ty CP Dược An Bình,Spasfon,Chống co thắt dạ dày,89000,140,2026-07-25
 Viên uống trắng da,Zydus Cadila,Công ty TNHH Dược phẩm Nhật Hưng,White Perfect,Chăm sóc da,210000,90,2026-12-31
-Collagen nước,OPV Pharmaceutical,Công ty TNHH Dược Bảo Minh,Collagen Plus,Bổ sung collagen,230000,80,2026-09-09
+Collagen nước,OPV Pharmaceutical,Công ty TNHH Dược Bảo Minh,Collagen Plus,Bổ sung collagen,230000,80,2025-08-15
 Thuốc trị tiêu chảy,Teva Pharmaceuticals,Công ty CP Dược Ánh Dương,Smecta,Ngừa tiêu chảy,90000,260,2026-06-01
 Vitamin C sủi,Merck & Co,Công ty TNHH Dược Trường Thọ,Vitamin C 1000mg,Bổ sung C,125000,210,2026-10-22
 Siro tăng sức đề kháng,NamHa Pharma,Công ty TNHH Dược Long An,Imunoglukan,Tăng đề kháng,185000,70,2026-11-30

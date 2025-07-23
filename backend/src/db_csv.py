@@ -120,12 +120,20 @@ def load_chi_tiet_hd():
         if not hd_list or not thuoc_list:
             print("Danh sách Hóa đơn hoặc Thuốc rỗng!")
             return
-
+        a=1
         for row in reader:
             try:
+                # print(f"Mã thuốc: {row['MaThuoc']}")
+                if row['MaThuoc']:
+                    thuoc = ThuocModel.objects.get(TenThuoc=row['MaThuoc'])  
+                    row['MaThuoc'] = thuoc.MaThuoc
+                else:
+                    row['MaThuoc'] = random.choice(thuoc_list).MaThuoc
+                # print(f"Đang xử lý chi tiết hóa đơn {a} với thuốc {row['MaThuoc']}")
+                
                 data = {
                     'MaHoaDon': random.choice(hd_list).MaHoaDon,
-                    'MaThuoc': random.choice(thuoc_list).MaThuoc,
+                    'MaThuoc': row['MaThuoc'],
                     'SoLuongBan': row['SoLuongBan'],
                     'GiaBan': row['GiaBan']
                 }
@@ -136,6 +144,8 @@ def load_chi_tiet_hd():
                     print("Lỗi chi tiết hóa đơn:", s.errors)
             except Exception as e:
                 print("Chi tiết hóa đơn - lỗi exception:", e)
+                
+            a= a + 1
                 
                                    
 if __name__ == '__main__':
