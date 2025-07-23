@@ -91,3 +91,11 @@ docker start mysql-container
 ```bash
 docker stop mysql-container
 ```
+
+---
+
+### Tạo cơ sở dữ liệu - mysql (Không dùng docker)
+Xem hướng dẫn trong học phần CT467
+```bash
+https://drive.google.com/drive/folders/12CPj5cC7M2b5HFrTSBPzYI5KDpuV5lWj?usp=sharing
+```
