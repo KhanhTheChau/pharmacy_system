@@ -78,7 +78,7 @@ class HoaDonSerializer(serializers.ModelSerializer):
         )
 
         tong_tien = result['TongTien'] or 0
-
+        # print(f"Tổng tiền hóa đơn {obj.MaHoaDon}: {tong_tien}")
         # Lưu xuống DB nếu khác với giá trị hiện tại
         if obj.TongTien != tong_tien:
             obj.TongTien = tong_tien

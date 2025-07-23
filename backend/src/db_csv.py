@@ -3,6 +3,7 @@ import django
 import csv
 import sys
 import random
+from datetime import datetime
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.src.app.settings")  
@@ -58,7 +59,16 @@ def load_thuoc():
                 row['MaLoai'] = str(loai.MaLoai)
                 row['MaHangSX'] = str(hangsx.MaHangSX)
                 row['MaNCC'] = str(ncc.MaNCC)
-
+                
+                han_su_dung = row.get("HanSuDung", "").strip()
+                if han_su_dung:
+                    # Nếu có giờ: "2026-12-01 00:00:00"
+                    if " " in han_su_dung:
+                        row["HanSuDung"] = datetime.strptime(han_su_dung, "%Y-%m-%d %H:%M:%S").date().isoformat()
+                    else:
+                        # Nếu chỉ có ngày: "2026-12-01"
+                        row["HanSuDung"] = datetime.strptime(han_su_dung, "%Y-%m-%d").date().isoformat()
+                
                 s = ThuocSerializer(data=row)
                 if s.is_valid():
                     s.save()
@@ -85,6 +95,14 @@ def load_hoa_don():
             try:
                 khach = KhachHangModel.objects.get(TenKhachHang=row['MaKH'])  
                 row['MaKH'] = khach.MaKhachHang
+                
+                han_su_dung = row.get("NgayLap", "").strip()
+                if han_su_dung:
+                    if " " in han_su_dung:
+                        row["NgayLap"] = datetime.strptime(han_su_dung, "%Y-%m-%d %H:%M:%S").date().isoformat()
+                    else:
+                        row["NgayLap"] = datetime.strptime(han_su_dung, "%Y-%m-%d").date().isoformat()
+                        
                 s = HoaDonSerializer(data=row)
                 if s.is_valid():
                     s.save()
