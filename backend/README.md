@@ -3,6 +3,8 @@
 ### Mô tả
 Backend được xây dựng bằng dijango cùng với cơ sở dữ liệu MySQL, dễ dàng viết API để giao tiếp đến Fontend tạo một hệ thống linh hoạt
 
+---
+
 ### Yêu cầu phiên bản
 - Python 3.10
 
