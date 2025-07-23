@@ -1,5 +1,7 @@
 ## Backend Dijango
 
+---
+
 ### Khởi động backend (nếu đã có cơ sở dữ liệu)
 
 1. Cài đặt các thư viện (Tại /backend)
@@ -26,6 +28,8 @@ python db_csv.py
 ```bash
 python manage.py runserver
 ```
+
+---
 
 ### Tạo cơ sở dữ liệu - mysql docker (Nếu chưa có csdl) - Linux/Window
 
