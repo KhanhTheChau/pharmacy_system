@@ -8,11 +8,29 @@
 
 ---
 
+### Công nghệ chính
+
+- Tailwindcss
+
+- Typescript
+
+- Thư viện hổ trợ react (như `recharts`, `react-toastify`, ...)
+
+- Thư viện hổ trợ xuất file `xlsx`, ...
+
+- Thư viện hổ trợ validation `formik` và `yup`
+
+- `axios` thư viện hổ trợ call APIAPI
+
+- ...v.v...
+
+---
+
 ### Yêu cầu
 
 - Node.js (phiên bản >= 16)
 - npm hoặc yarn
-- Backend Django đang chạy trên `http://localhost:8000`
+- Backend Django đang chạy trên `http://localhost:8000` hoặc port khác cũng được
 
 ---
 
@@ -22,7 +40,7 @@
 
 ```bash
 git clone <url-repo-frontend>
-cd <thư-mục-frontend>
+cd <thư-mục-frontend> # fontend/app
 ```
 
 2. Cài đặt thư viện 
@@ -35,10 +53,10 @@ yarn install
 
 3. Cấu hình URL kết nối Backend
 
-Vào file frontend/app/.env
+Vào file frontend/app/.env (Kiểm tra địa chỉ server backend)
 
 ```ts
-// Đường dẫn máy chủ backend
+// Địa chỉ máy chủ backend
 VITE_API_URL=http://localhost:8000/api/v1/
 
 ```
