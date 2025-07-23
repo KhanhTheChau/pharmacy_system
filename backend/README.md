@@ -1,7 +1,5 @@
 ## Backend Dijango
 
----
-
 ### Khởi động backend (nếu đã có cơ sở dữ liệu)
 
 1. Cài đặt các thư viện (Tại /backend)
