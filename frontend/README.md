@@ -4,7 +4,25 @@
 
 ### Mô tả
 
-Ứng dụng frontend React kết nối với backend Django qua API, sử dụng Axios để gọi các endpoint. Có dùng `tailwindcss` và `typescript` ,...
+Ứng dụng frontend React kết nối với backend Django qua API, sử dụng Axios để gọi các endpoint.
+
+---
+
+### Công nghệ chính
+
+- Tailwindcss
+
+- Typescript
+
+- Các thư viện của react (như `recharts`, `react-toastify`,...
+
+- Các thư viện hổ trợ xuất file `xlsx`, ....
+
+- Thư viện hổ trợ validation `formik` và `yup`
+
+- `axios`
+
+- ...v.v...
 
 ---
 
