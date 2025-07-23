@@ -14,13 +14,13 @@
 
 - Typescript
 
-- Các thư viện của react (như `recharts`, `react-toastify`,...
+- Thư viện hổ trợ react (như `recharts`, `react-toastify`, ...)
 
-- Các thư viện hổ trợ xuất file `xlsx`, ....
+- Thư viện hổ trợ xuất file `xlsx`, ...
 
 - Thư viện hổ trợ validation `formik` và `yup`
 
-- `axios`
+- `axios` thư viện hổ trợ call APIAPI
 
 - ...v.v...
 
