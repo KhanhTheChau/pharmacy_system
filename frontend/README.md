@@ -35,10 +35,10 @@ yarn install
 
 3. Cấu hình URL kết nối Backend
 
-Vào file frontend/app/.env
+Vào file frontend/app/.env (Kiểm tra địa chỉ server backend)
 
 ```ts
-// Đường dẫn máy chủ backend
+// Địa chỉ máy chủ backend
 VITE_API_URL=http://localhost:8000/api/v1/
 
 ```
