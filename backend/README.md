@@ -52,11 +52,17 @@ docker run --name mysql-container \
 ```
 
 `--name mysql-container`: tên container bạn đặt (tự đặt)
+
 `-e MYSQL_ROOT_PASSWORD=yourpassword`: đặt mật khẩu root (admin123 xem tại `/backend/src/app/settings.py`)
+
 `-e MYSQL_DATABASE=mydb`: tạo sẵn database tên mydb (điền `pharmacy_system` hoặc tự tạo sau)
+
 `-p 3306:3306`: mở cổng để kết nối từ bên ngoài (VD: DBeaver, PHPMyAdmin)
+
 `-v mysql_data:/var/lib/mysql`: lưu data trong volume mysql_data
+
 `-d mysql:8.0`: chạy bản MySQL 8
+
 
 3. Kiểm tra kết nối
 ```bash
