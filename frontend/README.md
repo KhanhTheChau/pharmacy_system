@@ -22,7 +22,7 @@
 
 ```bash
 git clone <url-repo-frontend>
-cd <thư-mục-frontend>
+cd <thư-mục-frontend> # fontend/app
 ```
 
 2. Cài đặt thư viện 
