@@ -16,7 +16,7 @@ export const fetchThuocs = async ():Promise<ThuocType[]> => {
 export const createThuoc = async (form: ThuocFormType): Promise<ThuocType> => {
     try {
         const res = await axiosClient.post<APIResponse<ThuocType>>("medicine/", form);
-        console.log("Response trả về:", res.data);
+        // console.log("Response trả về:", res.data);
         if (!res.data.success) throw new Error(res.data.message);
         return res.data.data!;
     } catch (error) {

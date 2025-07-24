@@ -13,7 +13,7 @@ const MainLayout: React.FC = () => {
     const fetchData = async () => {
       try {
         const drugs = await fetchSoonExpiringDrugs();
-        console.log(drugs)
+        // console.log(drugs)
         if (drugs.length > 0) {
           toast.warning(`Có ${drugs.length} thuốc sắp hết hạn!`, {
             position: "top-right",

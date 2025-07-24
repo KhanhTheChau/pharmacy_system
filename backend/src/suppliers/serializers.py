@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import NhaCungCapModel
 import re
 
-PHONE_REGEX = "^\+?[\d\s\-()]{7,20}$"
+PHONE_REGEX = "^\+?[\d\s\-()]{7,10}$"
 
 class NhaCungCapSerializer(serializers.ModelSerializer):
     MaNCC = serializers.CharField(read_only=True)
