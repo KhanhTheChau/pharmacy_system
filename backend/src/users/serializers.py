@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import KhachHangModel
 import re
 
-PHONE_REGEX = r"^\+?[\d\s\-()]{7,20}$"
+PHONE_REGEX = r"^\+?[\d\s\-()]{7,10}$"
 
 class KhachHangSerializer(serializers.ModelSerializer):
     MaKhachHang = serializers.CharField(read_only=True)
