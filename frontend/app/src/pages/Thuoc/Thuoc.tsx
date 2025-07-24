@@ -167,8 +167,17 @@ const Thuoc: React.FC = () => {
       HanSuDung,
     };
 
+    
+    const payload = {
+            ...form,
+            HanSuDung: form.HanSuDung
+                ? new Date(form.HanSuDung).toISOString().split('T')[0]
+                : new Date().toISOString().split('T')[0],
+            };
+
     try {
-      const data = await updateThuoc(MaThuoc, form);
+      // console.log(payload)
+      const data = await updateThuoc(MaThuoc, payload);
       alert(`Đã cập nhật thành công thông tin thuốc ${data.TenThuoc}`);
 
       const dsThuoc = await fetchThuocs();
